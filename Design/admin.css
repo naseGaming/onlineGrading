@@ -1,0 +1,192 @@
+body { /* to remove white spaces between div and body */
+	margin:0;
+	background-color: #4CAF50;
+}
+
+button{
+	outline:none;
+}
+
+.mainbar { /* css for main navigation bar*/
+	margin-top: 0px;
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #006400;
+	overflow-x: hidden;
+	padding-top: 20px;
+    list-style-type: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+}
+
+.active {/*css for selected tabs in navigation bar */
+	text-decoration: none;
+	font-size: 20px;
+	color: #006400;
+	display: block;
+	border: none;
+	background-color: white;
+	margin-top: -20px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+}
+
+.inactive {/*css for not selected tabs in navigation bar */
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+	border: none;
+	background-color: #006400;
+	margin-top: -20px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+	display: block;	
+}
+
+.activeT {/*css for selected tabs in navigation bar */
+	text-decoration: none;
+	font-size: 20px;
+	color: #006400;
+	display: block;
+	border: none;
+	background-color: white;
+	margin-top: -10px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+}
+
+.inactiveT {/*css for not selected tabs in navigation bar */
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+	border: none;
+	background-color: #006400;
+	margin-top: -10px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+	display: block;	
+}
+
+.actives{
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+	border: none;
+	background-color: #000;
+	margin-top: -10px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+}
+
+.inactives {/*css for drop down */
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+	border: none;
+	background-color: #006400;
+	margin-top: -10px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+}
+
+#subjects{
+	margin-top: -10px;
+}
+
+.logout{
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	display: block;
+	border: none;
+	background-color: #006400;
+	margin-top: -10px;
+	margin-left:-40px;
+	width: 120%;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.2);
+}
+
+.dropdown-container {
+	color: white;
+}
+
+.addInp{
+	border: none;
+	height: 30px;
+	width: 300px;
+}
+
+.addInps{
+	border: none;
+	height: 30px;
+	width: 300px;
+	border-bottom: 8px solid #006400;
+}
+
+.addText{
+	border: none;
+	resize: none;
+}
+
+.addTexts{
+	border: none;
+	border-bottom: 8px solid #006400;
+	resize: none;
+}
+
+.addButton{
+	width: 308px;
+	height: 30px;
+	border:none;
+	background-color: rgba(50, 50, 50, 1);
+	color: white;
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
+
+.addButtons{
+	width: 308px;
+	height: 30px;
+	border:none;
+	background-color: #006400;
+	color: white;
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+}
