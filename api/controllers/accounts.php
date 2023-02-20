@@ -5,6 +5,7 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if(strtoupper($requestMethod) == get) {
     
+    error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == post) {
@@ -14,21 +15,27 @@ else if(strtoupper($requestMethod) == post) {
     if($data->type == "login") {
         $content = $data->content;
 
-        echo json_encode(array(
+        $result = json_encode(array(
             "username" => $content->username,
             "password" => $content->password
         ));
+
+        output($result, "HTTP/1.1 200 OK");
     }
+
+    error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == put) {
     
+    error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == delete) {
     
+    error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else {
-    header("HTTP/1.1 404 Not Found");
+    error("Method not supported", "HTTP/1.1 422 Unprocessable Entity");
 }
