@@ -13,6 +13,9 @@
 .black-b {
     background: rgba(50, 50, 50, 1);
 }
+.transparent-b {
+    background: rgba(0, 0, 0, 0);
+}
 
 .red-f {
     color: rgba(200, 50, 50, 1);
