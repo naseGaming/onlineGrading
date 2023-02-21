@@ -1,5 +1,6 @@
 <?php
 require_once("../config.php");
+require_once("functions.php");
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
@@ -15,10 +16,7 @@ else if(strtoupper($requestMethod) == post) {
     if($data->type == "login") {
         $content = $data->content;
 
-        $result = json_encode(array(
-            "username" => $content->username,
-            "password" => $content->password
-        ));
+        $result = json_encode(login($content->username, $content->password, $con));
 
         output($result, "HTTP/1.1 200 OK");
     }
