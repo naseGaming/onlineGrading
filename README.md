@@ -6,3 +6,5 @@ It is created using html, css, native js and jquery for front-end, php for back-
 
 The template for sql is saved in this folder too but no real record from any personel nor student of the school
 It was never uploaded in the internet hence, I can only show you this to prove I really did this project
+
+To see the original(not refactored version) please select the legacy branch
