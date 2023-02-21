@@ -20,16 +20,16 @@ $(() => {
 
                     switch(response.role) {
                         case 0:
-                            window.location.href = "./pages/admin";
+                            window.location.href = "./admin";
                             break;
                         case 1:
-                            window.location.href = "./pages/teacher";
+                            window.location.href = "./teacher";
                             break;
                         case 2:
-                            window.location.href = "./pages/student";
+                            window.location.href = "./student";
                             break;
                         default:
-                            window.location.href = "./pages/student";
+                            window.location.href = "./student";
                             break;
                     }
                 }
