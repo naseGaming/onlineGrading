@@ -1,0 +1,43 @@
+.red-b {
+    background: rgba(200, 50, 50, 1);
+}
+.green-b {
+    background: rgba(50, 200, 50, 1);
+}
+.blue-b {
+    background: rgba(50, 50, 200, 1);
+}
+.white-b {
+    background: rgb(255, 255, 255);
+}
+.black-b {
+    background: rgba(50, 50, 50, 1);
+}
+
+.red-f {
+    color: rgba(200, 50, 50, 1);
+}
+.green-f {
+    color: rgba(50, 200, 50, 1);
+}
+.blue-f {
+    color: rgba(50, 50, 200, 1);
+}
+.white-f {
+    color: rgb(255, 255, 255);
+}
+.black-f {
+    color: rgba(50, 50, 50, 1);
+}
+
+
+
+.main-b {
+    background: rgba(50, 200, 50, 1);
+}
+.secondary-b {
+    background: rgba(200, 50, 50, 1);
+}
+.tertiary-b {
+    background: rgba(50, 50, 50, 1);
+}
