@@ -10,7 +10,13 @@ async function GetData(link, params = "") {
     })
 
     if(response.status != 200) {
-        return response.status + " " + response.statusText 
+        result = {
+            type: "http_error",
+            code: response.status,
+            message: response.statusText
+        }
+
+        return result
     }
     else {
         return response.json()
@@ -30,7 +36,13 @@ async function PostData(link, data = {}) {
     })
 
     if(response.status != 200) {
-        return response.status + " " + response.statusText 
+        result = {
+            type: "http_error",
+            code: response.status,
+            message: response.statusText
+        }
+
+        return result
     }
     else {
         return response.json()
@@ -50,7 +62,13 @@ async function PutData(link, data = {}) {
     })
 
     if(response.status != 200) {
-        return response.status + " " + response.statusText 
+        result = {
+            type: "http_error",
+            code: response.status,
+            message: response.statusText
+        }
+
+        return result
     }
     else {
         return response.json()
@@ -70,7 +88,13 @@ async function DeleteData(link, data = {}) {
     })
 
     if(response.status != 200) {
-        return response.status + " " + response.statusText 
+        result = {
+            type: "http_error",
+            code: response.status,
+            message: response.statusText
+        }
+
+        return result
     }
     else {
         return response.json()

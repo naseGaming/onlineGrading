@@ -33,6 +33,9 @@ $(() => {
                             break;
                     }
                 }
+                else if(response.type == "http_error") {  
+                    window.location.href = "./error_pages/?code=" + response.code + "&message=" + response.message;
+                }
                 else {
                     showNotification(response.message, response.type)
                 }
