@@ -27,7 +27,7 @@ $items = array(
     <?php
     foreach($items as $item) {
     ?>
-        <button class = "navigation_items transparent-b white-f" onclick = "navigate('<?php echo $item['link']; ?>');">
+        <button class = "sidebar_items transparent-b white-f" onclick = "navigate('<?php echo $item['link']; ?>');">
             <i class = "<?php echo $item['data-icon']; ?>"></i> <?php echo $item['name']; ?>
         </button>
     <?php

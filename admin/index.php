@@ -12,7 +12,7 @@
         <script src = "../src/jquery/jquery-ui.min.js"></script>
         <script src = "../src/notification-too/notification-too.js"></script>
         <script src = "../src/shared/fetch.js"></script>
-        <script src = "../src/index/script.js"></script>
+        <script src = "../src/admin/script.js"></script>
 
         <?php
             foreach($contents as $content){
@@ -21,10 +21,13 @@
         ?>
     </head>
     <body>
-		<div class = "navigation tertiary-b white-f" >
+    <div class = "navbar tertiary-b white-f">
+      <button id = "btnMenu" class = "transparent-b white-f" onclick = "showSidebar(this);"><i class="fa-solid fa-bars"></i> Menu</button>
+    </div>
+		<div class = "sidebar tertiary-b white-f" id = "sidebar" >
         <?php include $contents["navigation"]["path"] ?>
 		</div>
-    <div>
+    <div class = "content">
       <?php
         $key = array_keys($_GET);
 

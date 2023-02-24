@@ -20,7 +20,7 @@ $(() => {
 
                     switch(response.role) {
                         case 0:
-                            window.location.href = "./admin";
+                            window.location.href = "./admin/?dashboard";
                             break;
                         case 1:
                             window.location.href = "./teacher";
