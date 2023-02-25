@@ -22,7 +22,7 @@ $(() => {
                 setTimeout(() => {
                     switch(response.role) {
                         case 0:
-                            window.location.href = "./admin/?dashboard";
+                            window.location.href = "./backoffice/?dashboard";
                             break;
                         case 1:
                             window.location.href = "./teacher";
@@ -31,7 +31,7 @@ $(() => {
                             window.location.href = "./student";
                             break;
                         default:
-                            window.location.href = "./student";
+                            window.location.href = "./error_pages/?code=403&message=Permission Denied";
                             break;
                     }
                 }, 2000)

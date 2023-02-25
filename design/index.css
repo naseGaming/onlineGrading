@@ -6,9 +6,9 @@ body {
 
 .loginForm {
     float: left;
-    height: 40vh;
+    height: 50vh;
     width: 40vw;
-    margin-top: 30vh;
+    margin-top: 25vh;
     margin-left: 30vw;
     text-align: center;
     border-radius: 5px;
