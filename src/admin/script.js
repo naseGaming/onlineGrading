@@ -1,6 +1,6 @@
 
 
-function showSidebar(app) {
+function showSidebar() {
     let value = $("#btnMenu").html()
 
     if(value == '<i class="fa-solid fa-xmark"></i> Menu') {

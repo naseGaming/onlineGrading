@@ -10,7 +10,6 @@
         <script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
         <script src = "../src/jquery/jquery-3.1.1.min.js"></script>
         <script src = "../src/jquery/jquery-ui.min.js"></script>
-        <script src = "../src/notification-too/notification-too.js"></script>
         <script src = "../src/shared/fetch.js"></script>
         <script src = "../src/admin/script.js"></script>
 
@@ -22,7 +21,7 @@
     </head>
     <body>
     <div class = "navbar main-b white-f">
-      <button id = "btnMenu" class = "transparent-b white-f" onclick = "showSidebar(this);"><i class="fa-solid fa-bars"></i> Menu</button>
+      <button id = "btnMenu" class = "transparent-b white-f" onclick = "showSidebar();"><i class="fa-solid fa-bars"></i> Menu</button>
     </div>
 		<div class = "sidebar tertiary-b white-f" id = "sidebar" >
         <?php include $contents["navigation"]["path"] ?>
