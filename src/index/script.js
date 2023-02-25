@@ -16,28 +16,38 @@ $(() => {
             PostData("./api/controllers/accounts.php", data)
             .then(response => {
                 if(response.type == "success") {
-                    showNotification("Login successful!", response.type)
+                    Swal.fire({
+                        icon: response.type,
+                        title: "Login Success!",
+                    })
+                    Swal.showLoading()
 
-                    switch(response.role) {
-                        case 0:
-                            window.location.href = "./admin/?dashboard";
-                            break;
-                        case 1:
-                            window.location.href = "./teacher";
-                            break;
-                        case 2:
-                            window.location.href = "./student";
-                            break;
-                        default:
-                            window.location.href = "./student";
-                            break;
-                    }
+                    setTimeout(() => {
+                        switch(response.role) {
+                            case 0:
+                                window.location.href = "./admin/?dashboard";
+                                break;
+                            case 1:
+                                window.location.href = "./teacher";
+                                break;
+                            case 2:
+                                window.location.href = "./student";
+                                break;
+                            default:
+                                window.location.href = "./student";
+                                break;
+                        }
+                    }, 2000)
                 }
-                else if(response.type == "http_error") {  
+                else if(response.type == "http_error") {
                     window.location.href = "./error_pages/?code=" + response.code + "&message=" + response.message;
                 }
                 else {
-                    showNotification(response.message, response.type)
+                    Swal.fire({
+                        icon: response.type,
+                        title: "Login Failed!",
+                        text: response.message,
+                    })
                 }
             })
         })

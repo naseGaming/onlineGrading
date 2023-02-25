@@ -4,11 +4,16 @@ require_once("../config.php");
 function viewSubjects($connection) {
     $sql = "SELECT * FROM subjects";
     
-    $row = SelectExecuteStatement($connection, $sql, []);
-    $count = 0;
+    $result = SelectExecuteStatement($connection, $sql, []);
+    $subject = array();
 
-    while($row) {
-        $categories[$count] = array (
+    $count = 0;
+    $flag = false;
+
+    while($row = $result -> fetch_assoc()) {
+        $flag = true;
+
+        $subject[$count] = array (
             "description" => $row["subjdesc"],
             "year" => $row["year"],
         );
@@ -16,5 +21,15 @@ function viewSubjects($connection) {
         $count++;
     }
 
-    return $categories;
+    if($flag) {
+        return array(
+            "type" => "success",
+            "content" => $subject
+        );
+    }
+
+    return array(
+        "type" => "error",
+        "message" => "No subject to display!"
+    );
 }

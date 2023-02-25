@@ -21,7 +21,7 @@
         ?>
     </head>
     <body>
-    <div class = "navbar tertiary-b white-f">
+    <div class = "navbar main-b white-f">
       <button id = "btnMenu" class = "transparent-b white-f" onclick = "showSidebar(this);"><i class="fa-solid fa-bars"></i> Menu</button>
     </div>
 		<div class = "sidebar tertiary-b white-f" id = "sidebar" >

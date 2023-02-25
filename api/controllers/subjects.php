@@ -7,8 +7,6 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $data = $_GET["type"];
 
-    echo $data;
-
     if($data == "viewSubjects") {
         $result = json_encode(viewSubjects($con));
 

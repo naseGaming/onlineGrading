@@ -7,12 +7,14 @@ function SelectExecuteStatement($connection, $sql, $params = []) {
         error("Bad Request", "HTTP/1.1 400 Bad Request");
     }
 
-    for($i = 0; $i < count($params); $i += 2) {
-        $stmt->bind_param($params[$i], $params[$i + 1]);
+    if(count($params) > 0) {
+        for($i = 0; $i < count($params); $i += 2) {
+            $stmt->bind_param($params[$i], $params[$i + 1]);
+        }
     }
 
     $stmt->execute();
     $result = $stmt->get_result();
     
-    return $result->fetch_assoc();
+    return $result;
 }

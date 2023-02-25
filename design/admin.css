@@ -20,7 +20,7 @@ body {
     margin: 0;
     border: none;
     text-align: left;
-    padding-left: 10px;
+    padding-left: 20px;
     font-size: 1em;
     cursor: pointer;
 }
@@ -48,6 +48,7 @@ body {
     cursor: pointer;
     border: none;
     text-align: left;
+    padding-left: 30px;
 }
 
 .navbar button:hover {
@@ -62,10 +63,11 @@ body {
 }
 
 table {
-  border-collapse: collapse;
-  width: 60%;
-  margin-left: 20%;
-  margin-top: 5%;
+    border-collapse: collapse;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+    border: 2px solid gray;
 }
 
 tr {
@@ -73,13 +75,13 @@ tr {
 }
 
 th, td {
-  text-align: left;
-  padding: 15px;
+    text-align: left;
+    padding: 15px;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-  background-color: #04AA6D;
-  color: white;
+    background: rgba(50, 150, 50, 1);
+    color: white;
 }

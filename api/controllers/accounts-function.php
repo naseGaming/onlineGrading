@@ -5,9 +5,9 @@ function login($username, $password, $connection) {
     $sql = "SELECT * FROM accounts WHERE username = ? ";
     $params = ["s", $username];
     
-    $row = SelectExecuteStatement($connection, $sql, $params);
+    $result = SelectExecuteStatement($connection, $sql, $params);
 
-    while($row) {
+    while($row = $result -> fetch_assoc()) {
 		if (password_verify($password, $row["password"])){
 
             $_SESSION["userID"] = $row["id"];
