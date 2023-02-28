@@ -23,7 +23,6 @@ $items = array(
     )
 );
 ?>
-<html>
     <?php
     foreach($items as $item) {
     ?>
@@ -33,4 +32,3 @@ $items = array(
     <?php
     }
     ?>
-</html>

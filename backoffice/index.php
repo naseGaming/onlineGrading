@@ -4,7 +4,7 @@
     $contents = json_decode(file_get_contents("contents.json"), true);
 ?>
 
-<html>
+<!DOCTYPE html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../design/colors.css" />
@@ -13,11 +13,12 @@
         <script src = "../src/jquery/jquery-3.1.1.min.js"></script>
         <script src = "../src/jquery/jquery-ui.min.js"></script>
         <script src = "../src/shared/fetch.js"></script>
+        <script src = "../src/shared/pagination.js"></script>
         <script src = "../src/backoffice/script.js"></script>
-
         <?php
             foreach($contents as $content){
                 echo "<script src='{$content['script']}'></script>";
+                echo "\r\n";
             }
         ?>
     </head>
@@ -28,7 +29,7 @@
       </button>
       <button id = "btnProfile" class = "menu-name transparent-b white-f" onclick = "showProfile();">
         <?php
-          echo "Hi, " . $_SESSION["userName"];
+          echo "Hi, " . $_SESSION["userName"] . "&nbsp;&nbsp;&nbsp;<i class='fa-solid fa-caret-down'></i>";
         ?>
       </button>
     </div>

@@ -70,9 +70,9 @@ body {
 
 table {
     border-collapse: collapse;
-    width: 60%;
-    margin-left: 20%;
-    margin-top: 5%;
+    width: 60vw;
+    margin-left: 20vw;
+    margin-top: 7vh;
     border: 2px solid gray;
 }
 
@@ -105,4 +105,19 @@ th {
 
 .table_button:hover {
     background: rgba(50, 50, 50, 1);
+}
+
+.tblPage {
+    float: left;
+    height: 7vh;
+    width: 60vw;
+    margin-left: 20vw;
+}
+
+.tblPage button {
+    float: left;
+    height: 5vh;
+    width: 3vw;
+    margin-left: 1vw;
+    margin-top: 1vh;
 }

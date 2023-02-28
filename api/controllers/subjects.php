@@ -8,7 +8,12 @@ if(strtoupper($requestMethod) == get) {
 
     //GET SUBJECTS
     if($data == "viewSubjects") {
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit 1, 5";
+        $page = $_GET["page"];
+
+        $page--;
+        $page *= 5;
+
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit $page, 5";
         
         $result = SelectExecuteStatement($con, $sql, []);
         $subject = array();
@@ -29,10 +34,19 @@ if(strtoupper($requestMethod) == get) {
     
             $count++;
         }
+        
+        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects";
+        $result = SelectExecuteStatement($con, $sql, []);
+        $length = 0;
+
+        while($row = $result -> fetch_assoc()) {
+            $length = $row["max_count"];
+        }
     
         if($flag) {
             $result = array(
                 "type" => "success",
+                "length" => $length,
                 "content" => $subject
             );
         }
