@@ -1,5 +1,5 @@
 <?php
-    require_once("../api/config.php");
+    require_once("../api/session.php");
 
     $contents = json_decode(file_get_contents("contents.json"), true);
 ?>

@@ -8,7 +8,7 @@ if(strtoupper($requestMethod) == get) {
 
     //GET SUBJECTS
     if($data == "viewSubjects") {
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit 1, 5";
         
         $result = SelectExecuteStatement($con, $sql, []);
         $subject = array();
