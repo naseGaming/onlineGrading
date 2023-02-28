@@ -36,11 +36,19 @@
 		<div class = "sidebar tertiary-b white-f" id = "sidebar" >
         <?php include $contents["navigation"]["path"] ?>
 		</div>
+    <div class = "profile_bar tertiary-b white-f" id = "profile_bar" >
+      <button class = "tertiary-b white-f" onclick = "logout();">Logout <i class="fa-solid fa-power-off"></i></button>
+    </div>
     <div class = "content">
       <?php
         $key = array_keys($_GET);
 
-        include $contents[$key[0]]["path"]
+        if(count($key) == 0 ) {
+          include $contents["dashboard"]["path"];
+        }
+        else {
+          include $contents[$key[0]]["path"];
+        }
       ?>
     </div>
     </body>

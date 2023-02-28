@@ -1,4 +1,4 @@
-
+var isProfileShown = false
 
 function showSidebar() {
     let value = $("#btnMenu").html()
@@ -11,4 +11,20 @@ function showSidebar() {
         $("#btnMenu").html('<i class="fa-solid fa-xmark"></i> Menu')
         $("#sidebar").show("slide", { direction: "left" }, 500)
     }
+}
+
+function showProfile() {
+
+    if(isProfileShown) {
+        $("#profile_bar").slideUp();
+        isProfileShown = false
+    }
+    else {
+        $("#profile_bar").slideDown();
+        isProfileShown = true
+    }
+}
+
+function logout() {
+    window.location.href = "../api/logout.php";
 }
