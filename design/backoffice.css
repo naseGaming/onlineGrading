@@ -1,0 +1,150 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    height: 92vh;
+    width: 200px;
+    margin-top: 8vh;
+    display: none;
+}
+
+.sidebar_items {
+    float: left;
+    height: 50px;
+    width: 100%;
+    margin: 0;
+    border: none;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.sidebar_items i {
+    margin-right: 10px;
+}
+
+.sidebar_items:hover {
+    background: rgba(250, 250, 250, 1);
+    color: rgba(50, 50, 50, 1);
+}
+
+.navbar {
+    float: left;
+    height: 8vh;
+    width: 100vw;
+    z-index: 5;
+}
+
+.navbar button {
+    float: left;
+    height: 100%;
+    width: 200px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.menu-name {
+    float: right !important;
+    width: auto !important;
+    padding-right: 30px;
+}
+
+.navbar button:hover {
+    background: rgba(250, 250, 250, 1);
+    color: rgba(50, 50, 50, 1);
+}
+
+.profile_bar {
+    position: fixed;
+    height: 8vh;
+    width: 12vw;
+    margin-top: 8vh;
+    margin-left: 88vw;
+    display: none;
+    z-index: 3;
+}
+
+.profile_bar button {
+    float: left;
+    height: 100%;
+    width: 100%;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    padding-left: 30px;
+}
+
+.profile_bar button:hover {
+    background: rgba(50, 50, 200, 1);
+    color: rgba(250, 250, 250, 1);
+}
+
+.content {
+    float: left;
+    height: 92vh;
+    width: 100vw;
+}
+
+table {
+    border-collapse: collapse;
+    width: 60vw;
+    margin-left: 20vw;
+    margin-top: 7vh;
+    border: 2px solid gray;
+}
+
+tr {
+    border-radius: 8px;
+}
+
+th, td {
+    text-align: left;
+    padding: 15px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background: rgba(50, 150, 50, 1);
+    color: white;
+}
+
+.table_button {
+    float: left;
+    width: auto;
+    height: auto;
+    margin-right: 5px;
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.table_button:hover {
+    background: rgba(50, 50, 50, 1);
+}
+
+.tblPage {
+    float: left;
+    height: 7vh;
+    width: 60vw;
+    margin-left: 20vw;
+}
+
+.tblPage button {
+    float: left;
+    height: 5vh;
+    width: 3vw;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}

@@ -1,3 +1,6 @@
+<?php
+    require_once("api/session.php");
+?>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +10,7 @@
         <script src = "src/jquery/jquery-3.1.1.min.js"></script>
         <script src = "src/jquery/jquery-ui.min.js"></script>
         <script src = "src/notification-too/notification-too.js"></script>
+        <script src = "//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src = "src/shared/fetch.js"></script>
         <script src = "src/index/script.js"></script>
     </head>

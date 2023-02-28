@@ -1,26 +1,28 @@
 $(() => {
-    $.when(setNotification("src/notification-too"))
-    .done(() => {
-
-        $("#frmLogin").on("submit", (e) => {
-            e.preventDefault()
-            
-            data = {
-                type: "login",
-                content: {
-                    username: $("#txtUsername").val(),
-                    password: $("#txtPassword").val()
-                }
+    $("#frmLogin").on("submit", (e) => {
+        e.preventDefault()
+        
+        data = {
+            type: "login",
+            content: {
+                username: $("#txtUsername").val(),
+                password: $("#txtPassword").val()
             }
-            
-            PostData("./api/controllers/accounts.php", data)
-            .then(response => {
-                if(response.type == "success") {
-                    showNotification("Login successful!", response.type)
+        }
+        
+        PostData("./api/controllers/accounts.php", data)
+        .then(response => {
+            if(response.type == "success") {
+                Swal.fire({
+                    icon: response.type,
+                    title: "Login Success!",
+                })
+                Swal.showLoading()
 
+                setTimeout(() => {
                     switch(response.role) {
                         case 0:
-                            window.location.href = "./admin";
+                            window.location.href = "./backoffice/?dashboard";
                             break;
                         case 1:
                             window.location.href = "./teacher";
@@ -29,17 +31,21 @@ $(() => {
                             window.location.href = "./student";
                             break;
                         default:
-                            window.location.href = "./student";
+                            window.location.href = "./error_pages/?code=403&message=Permission Denied";
                             break;
                     }
-                }
-                else if(response.type == "http_error") {  
-                    window.location.href = "./error_pages/?code=" + response.code + "&message=" + response.message;
-                }
-                else {
-                    showNotification(response.message, response.type)
-                }
-            })
+                }, 2000)
+            }
+            else if(response.type == "http_error") {
+                window.location.href = "./error_pages/?code=" + response.code + "&message=" + response.message;
+            }
+            else {
+                Swal.fire({
+                    icon: response.type,
+                    title: "Login Failed!",
+                    text: response.message,
+                })
+            }
         })
     })
 })
