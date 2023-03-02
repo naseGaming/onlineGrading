@@ -4,14 +4,13 @@ async function paginateTable(data = {}) {
     .then(response => {
         if(response.type == "success") {
             for(let items in response.content) {
-                let i = 0;
                 let id = "";
                 row += `<tr>`
 
                 Object.keys(response.content[items]).forEach(function(key) {
                     var value = response.content[items][key];
 
-                    if(i == 0 ) {
+                    if(key == "id") {
                         id = value
                     }
                     else {
@@ -20,7 +19,6 @@ async function paginateTable(data = {}) {
                             ${value}
                         </td>`
                     }
-                    i++;
                 });
 
                 if(data.method != "") {
@@ -66,7 +64,7 @@ function renderPageButtons(length, page_id, current_page, data = {}) {
     else {
         length = 1
     }
-    console.log(length)
+    
     data = JSON.stringify(data)
     currentPage = parseInt(current_page)
     const range = 4
