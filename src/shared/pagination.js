@@ -69,7 +69,7 @@ function renderPageButtons(length, page_id, current_page, data = {}) {
     console.log(length)
     data = JSON.stringify(data)
     currentPage = parseInt(current_page)
-    const range = 2
+    const range = 4
     let page = ""
     //checks if previous and last will display
     if(current_page > 1) {

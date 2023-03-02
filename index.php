@@ -17,7 +17,9 @@
     <body>
 		<div class = "loginForm main-b" >
             <form id = "frmLogin">
-                <h1 class = "white-f">Login</h1>
+                <div class = "header">
+                    <h1 class = "white-f">Welcome to St.Mark's College Grade Portal</h1>
+                </div>
                 <input type = "text" id = "txtUsername" placeholder = "Username" />
                 <input type = "password" id = "txtPassword" placeholder = "Password"/>
                 <input type = "submit" value = "Login" class = "tertiary-b white-f"/>
