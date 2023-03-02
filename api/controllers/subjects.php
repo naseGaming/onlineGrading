@@ -78,5 +78,5 @@ else if(strtoupper($requestMethod) == delete) {
 }
 
 else {
-    error("Method not supported", "HTTP/1.1 422 Unprocessable Entity");
+    error("Method not supported", "HTTP/1.1 405 Method Not Allowed");
 }
