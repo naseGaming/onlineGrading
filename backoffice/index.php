@@ -30,7 +30,7 @@
     <body>
     <div class = "navbar main-b white-f">
       <button id = "btnMenu" class = "transparent-b white-f" onclick = "showSidebar();">
-        <i class="fa-solid fa-bars"></i> Menu
+        <i class="fa-solid fa-bars"></i>&nbsp;&nbsp;Menu
       </button>
       <button id = "btnProfile" class = "menu-name transparent-b white-f" onclick = "showProfile();">
         <?php
