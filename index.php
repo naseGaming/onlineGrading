@@ -14,14 +14,30 @@
         <script src = "src/index/script.js"></script>
     </head>
     <body>
-		<div class = "loginForm main-b" >
+		<div class = "loginForm" >
             <form id = "frmLogin">
                 <div class = "header">
-                    <h1 class = "white-f">Welcome to St.Mark's College Grade Portal</h1>
+                    <h1>Welcome to St.Mark's College Grade Portal</h1>
                 </div>
-                <input type = "text" id = "txtUsername" placeholder = "Username" />
-                <input type = "password" id = "txtPassword" placeholder = "Password"/>
-                <input type = "submit" value = "Login" class = "tertiary-b white-f"/>
+                <div class = "form_group">
+                    <label>Username</label>
+                    <div class = "input_group">
+                        <input type = "text" id = "txtUsername">
+                        <div class = "input_icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class = "form_group">
+                    <label>Password</label>
+                    <div class = "input_group">
+                        <input type = "password" id = "txtPassword">
+                        <div class = "input_icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+                <input type = "submit" value = "Login" class = "main-b white-f"/>
             </form>
 		</div>
     </body>
