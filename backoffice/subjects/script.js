@@ -13,3 +13,20 @@ $(() => {
 
     paginateTable(details)
 })
+
+function showSubjectModal(type) {
+    let title = ""
+
+    if(type == "add") {
+        title = "Add Subject Form"
+
+        $("#subject_modal_action").val("add")
+    }
+
+    let data = {
+        id: "subject_modal",
+        title: title
+    }
+
+    showModal(data)
+}

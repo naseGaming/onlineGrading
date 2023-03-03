@@ -1,5 +1,5 @@
 <div class = "page_header">
-    <button class = "blue-b white-f">Add</button>
+    <button class = "blue-b white-f" onclick = "showSubjectModal('add')">Add</button>
 </div>
 <table id = "tblSubjects">
     <thead>
@@ -16,4 +16,69 @@
 </table>
 <div class = "tblPage" id = "tblSubjects-page">
 
+</div>
+
+<div class = "modal" id = "subject_modal">
+    <div class = "modal-header">
+        <p>Title</p>
+    </div>
+    <div class = "modal-content">
+        <form>
+            <input type = "hidden" id = "subject_modal_action" value = "add" />
+            <div class = "form_group">
+                <label>Subject Code</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "subject_code">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Subject Description</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "subject_description">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Year</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "subject_year">
+                        <option value = "0">~Please Select a Year~</option>
+                        <option>Grade 1</option>
+                        <option>Grade 2</option>
+                        <option>Grade 3</option>
+                        <option>Grade 4</option>
+                        <option>Grade 5</option>
+                        <option>Grade 6</option>
+                        <option>Grade 7</option>
+                        <option>Grade 8</option>
+                        <option>Grade 9</option>
+                        <option>Grade 10</option>
+                        <option>Grade 11</option>
+                        <option>Grade 12</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Teacher</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "subject_teacher">
+                </div>
+            </div>
+            <input class = "button_form" type = "submit" value = "Save" />
+        </form>
+    </div>
+    <div class = "modal-footer">
+        <button onclick = "closeModal();">Close</button>
+    </div>
 </div>

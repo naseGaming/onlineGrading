@@ -17,6 +17,7 @@
         <script src = "../src/jquery/jquery-ui.min.js"></script>
         <script src = "../src/shared/fetch.js"></script>
         <script src = "../src/shared/pagination.js"></script>
+        <script src = "../src/shared/modal.js"></script>
         <script src = "../src/backoffice/script.js"></script>
         <script src = "navigation/script.js"></script>
         <?php
