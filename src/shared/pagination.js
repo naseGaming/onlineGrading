@@ -4,14 +4,13 @@ async function paginateTable(data = {}) {
     .then(response => {
         if(response.type == "success") {
             for(let items in response.content) {
-                let i = 0;
                 let id = "";
                 row += `<tr>`
 
                 Object.keys(response.content[items]).forEach(function(key) {
                     var value = response.content[items][key];
 
-                    if(i == 0 ) {
+                    if(key == "id") {
                         id = value
                     }
                     else {
@@ -20,7 +19,6 @@ async function paginateTable(data = {}) {
                             ${value}
                         </td>`
                     }
-                    i++;
                 });
 
                 if(data.method != "") {
@@ -42,6 +40,9 @@ async function paginateTable(data = {}) {
 
             $("#" + data.table_id + " tbody").html(row)
             renderPageButtons(response.length, data.table_id, data.current_page, data)
+        }
+        else {
+            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
         }
     })
 }
@@ -66,10 +67,10 @@ function renderPageButtons(length, page_id, current_page, data = {}) {
     else {
         length = 1
     }
-    console.log(length)
+    
     data = JSON.stringify(data)
     currentPage = parseInt(current_page)
-    const range = 2
+    const range = 4
     let page = ""
     //checks if previous and last will display
     if(current_page > 1) {

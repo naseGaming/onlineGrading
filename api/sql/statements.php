@@ -4,7 +4,7 @@ function SelectExecuteStatement($connection, $sql, $params = []) {
     $stmt = $connection->prepare($sql);
     
     if(!$stmt) {
-        error("Bad Request", "HTTP/1.1 400 Bad Request");
+        error("Bad Request", "HTTP/1.1 500 Internal Server Error");
     }
     
     if(count($params) > 0) {

@@ -7,16 +7,12 @@ if(strtoupper($requestMethod) == get) {
     $data = $_GET["type"];
 
     //GET SUBJECTS
-    if($data == "viewSubjects") {
-        $page = $_GET["page"];
-
-        $page--;
-        $page *= 5;
-
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit $page, 5";
+    if($data == "getTeachers") {
+        $sql = "SELECT username, first, middle, last FROM accounts WHERE accountType = ?";
+        $params = ["i", 1];
         
-        $result = SelectExecuteStatement($con, $sql, []);
-        $subject = array();
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $teachers = array();
     
         $count = 0;
         $flag = false;
@@ -24,36 +20,26 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
     
-            $subject[$count] = array (
-                "id" => $row["subjID"],
-                "code" => $row["subjcode"],
-                "description" => $row["subjdesc"],
-                "year" => $row["year"],
-                "teacher" => $row["first"] . " " . $row["last"],
+            $teachers[$count] = array (
+                "username" => $row["username"],
+                "first_name" => $row["first"],
+                "middle_name" => $row["middle"],
+                "last_name" => $row["last"],
             );
     
             $count++;
-        }
-        
-        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects";
-        $result = SelectExecuteStatement($con, $sql, []);
-        $length = 0;
-
-        while($row = $result -> fetch_assoc()) {
-            $length = $row["max_count"];
         }
     
         if($flag) {
             $result = array(
                 "type" => "success",
-                "length" => $length,
-                "content" => $subject
+                "content" => $teachers
             );
         }
         else {
             $result = array(
                 "type" => "error",
-                "message" => "No subject to display!"
+                "message" => "No teacher available!"
             );
         }
 

@@ -4,19 +4,20 @@ body {
     margin: 0;
 }
 
-div {
+.error_div {
     float: left;
     height: 40vh;
     width: 40vw;
-    margin-top: 15vh;
+    margin-top: 5vh;
     margin-left: 30vw;
     text-align: center;
+    color: rgba(0, 90, 165, 1);
 }
 
-h1 {
+.error_div h1 {
     font-size: 8em;
 }
 
-h3 {
+.error_div h3 {
     font-size: 2em;
 }
