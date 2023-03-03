@@ -1,3 +1,6 @@
+var isUsernameFocus = false
+var usernameFocusTimer = ""
+
 $(() => {
     $("#frmLogin").on("submit", (e) => {
         e.preventDefault()

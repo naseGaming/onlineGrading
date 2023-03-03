@@ -62,6 +62,12 @@ h1 {
     outline: none;
     border-right: none;
     padding-left: 10px;
+    font-size: 0.8em;
+    transition-duration: 0.5s;
+}
+
+.input_group input:focus {
+    font-size: 1em;
 }
 
 input[type="submit"] {
@@ -72,6 +78,11 @@ input[type="submit"] {
     padding: 10px;
     border: none;
     cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:focus {
+    background: rgba(50, 50, 50, 1);
 }
 
 input[type="submit"]:hover {

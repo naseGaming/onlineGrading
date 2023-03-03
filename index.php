@@ -23,7 +23,7 @@
                     <label>Username</label>
                     <div class = "input_group">
                         <input type = "text" id = "txtUsername">
-                        <div class = "input_icon">
+                        <div class = "input_icon" id = "divUsername">
                             <i class="fa-solid fa-user"></i>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                     <label>Password</label>
                     <div class = "input_group">
                         <input type = "password" id = "txtPassword">
-                        <div class = "input_icon">
+                        <div class = "input_icon" id = "divPassword">
                             <i class="fa-solid fa-lock"></i>
                         </div>
                     </div>
