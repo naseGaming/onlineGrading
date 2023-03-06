@@ -1,6 +1,5 @@
 $(() => {
     const details = {
-        url_string: "type=viewSubjects",
         url_page: 1,
         url: "../api/controllers/subjects.php",
         method: {
@@ -33,7 +32,7 @@ function showSubjectModal(type) {
 }
 
 function loadTeacherComboBox() {
-    GetData("../api/controllers/teachers.php", "type=getTeachers")
+    GetData("../api/controllers/teachers.php", "")
     .then(response => {
         if(response.type == "success") {
             let row = `<option value = "0">~Please Select a Teacher~</option>`

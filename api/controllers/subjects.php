@@ -4,10 +4,10 @@ require_once("../config.php");
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if(strtoupper($requestMethod) == get) {
-    $data = $_GET["type"];
+    $key = array_keys($_GET);
 
     //GET SUBJECTS
-    if($data == "viewSubjects") {
+    if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
         $page--;

@@ -1,6 +1,6 @@
 async function paginateTable(data = {}) {
     var row = "";
-    GetData(data.url, data.url_string + "&page=" + data.url_page)
+    GetData(data.url, "page=" + data.url_page)
     .then(response => {
         if(response.type == "success") {
             for(let items in response.content) {

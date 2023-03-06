@@ -6,14 +6,11 @@ $(() => {
         e.preventDefault()
         
         data = {
-            type: "login",
-            content: {
-                username: $("#txtUsername").val(),
-                password: $("#txtPassword").val()
-            }
+            username: $("#txtUsername").val(),
+            password: $("#txtPassword").val()
         }
         
-        PostData("./api/controllers/accounts.php", data)
+        PostData("./api/controllers/login.php", data)
         .then(response => {
             if(response.type == "success") {
                 Swal.fire({

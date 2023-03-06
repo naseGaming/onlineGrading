@@ -1,5 +1,7 @@
 async function GetData(link, params = "") {
-    const response = await fetch(link + "?" + params, {
+    link = params == "" ? link : link + "?" + params
+
+    const response = await fetch(link, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
