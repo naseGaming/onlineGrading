@@ -24,10 +24,10 @@ async function paginateTable(data = {}) {
                 if(data.method != "") {
                     row += `
                         <td>
-                            <button id = "${id}" class = "table_button blue-b white-f onclick = "${data.method.edit}")">
+                            <button id = "${id}" class = "table_button blue-b white-f" onclick = "${data.method.edit}")">
                                 Edit
                             </button>
-                            <button id = "${id}" class = "table_button red-b white-f onclick = "${data.method.delete}">
+                            <button id = "${id}" class = "table_button red-b white-f" onclick = "${data.method.delete}">
                                 Delete
                             </button>
                         </td>

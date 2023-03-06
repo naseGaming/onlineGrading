@@ -15,6 +15,10 @@ $(() => {
     
     $("#error_code").html(render)
     switch(parseInt(error_code[1])) {
+        case 403: {
+            message = "Houston, we can not commit to that unholy request over."
+            break
+        }
         case 404: {
             message = "Houston, we cannot find the web page you're requesting over."
             break

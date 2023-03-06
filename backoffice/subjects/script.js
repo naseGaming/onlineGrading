@@ -11,6 +11,7 @@ $(() => {
     }
 
     paginateTable(details)
+    loadTeacherComboBox()
 })
 
 function showSubjectModal(type) {
@@ -18,8 +19,12 @@ function showSubjectModal(type) {
 
     if(type == "add") {
         title = "Add Subject Form"
-
-        $("#subject_modal_action").val("add")
+    }
+    else if(type == "edit") {
+        title = "Edit Subject Form"
+    }
+    else {
+        title = "Delete Subject Form"
     }
 
     let data = {
@@ -27,7 +32,7 @@ function showSubjectModal(type) {
         title: title
     }
 
-    loadTeacherComboBox()
+    $("#subject_modal_action").val(type)
     showModal(data)
 }
 
@@ -47,4 +52,45 @@ function loadTeacherComboBox() {
             window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
         }
     })
+}
+
+function editSubject(app) {
+    const id = app.id
+
+    GetData("../api/controllers/subjects.php", "id=" + id)
+    .then(response => {
+        if(response.type == "success") {
+            response.content
+
+            showSubjectModal("edit")
+        }
+        else {
+            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+        }
+    })
+}
+
+function deleteSubject(app) {
+    const id = app.id
+
+    GetData("../api/controllers/subjects.php", "id=" + id)
+    .then(response => {
+        if(response.type == "success") {
+            response.content
+
+            showSubjectModal("delete")
+        }
+        else {
+            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+        }
+    })
+}
+
+function populateForm(data = {}) {
+    $("#subject_code").val(data.code)
+    $("#subject_description").val(data.description)
+    $("#subject_year").val(data.year).change()
+    $("#subject_teacher").val(data.teacher).change()
+
+    console.log($("#subject_teacher").val())
 }

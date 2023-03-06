@@ -59,6 +59,39 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    if(isset($_GET["id"])) {
+        $id = $_GET["id"];
+
+        $sql = "SELECT subjcode, subjdesc, year, teacher FROM subjects WHERE subjID = ?";
+        $params = ["i", $id];
+        $subject = array();
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $flag = false;
+
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+
+            $subject = array(
+                "code" => $row["subjcode"],
+                "description" => $row["subjdesc"],
+                "year" => $row["year"],
+                "teacher" => $row["teacher"]
+            );
+        }
+
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "content" => $subject
+            );
+        }
+        else {
+            error("Bad Request", "HTTP/1.1 403 Bad Request");
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
