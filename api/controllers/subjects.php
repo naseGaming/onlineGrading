@@ -4,18 +4,19 @@ require_once("../config.php");
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if(strtoupper($requestMethod) == get) {
-    $data = $_GET["type"];
+    $key = array_keys($_GET);
 
     //GET SUBJECTS
-    if($data == "viewSubjects") {
+    if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
         $page--;
         $page *= 5;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit $page, 5";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 5";
+        $params = ["i", 0];
         
-        $result = SelectExecuteStatement($con, $sql, []);
+        $result = SelectExecuteStatement($con, $sql, $params);
         $subject = array();
     
         $count = 0;
@@ -59,6 +60,39 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    if(isset($_GET["id"])) {
+        $id = $_GET["id"];
+
+        $sql = "SELECT subjcode, subjdesc, year, teacher FROM subjects WHERE subjID = ?";
+        $params = ["i", $id];
+        $subject = array();
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $flag = false;
+
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+
+            $subject = array(
+                "code" => $row["subjcode"],
+                "description" => $row["subjdesc"],
+                "year" => $row["year"],
+                "teacher" => $row["teacher"]
+            );
+        }
+
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "content" => $subject
+            );
+        }
+        else {
+            error("Bad Request", "HTTP/1.1 403 Bad Request");
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
@@ -73,6 +107,28 @@ else if(strtoupper($requestMethod) == put) {
 }
 
 else if(strtoupper($requestMethod) == delete) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    if(isset($data->id)) {
+        $sql = "UPDATE subjects SET is_deleted = ? WHERE subjID = ?";
+        $params = ["ii", 1, $data->id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject deleted successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while deleting subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
