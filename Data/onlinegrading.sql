@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 08:40 AM
+-- Generation Time: Mar 07, 2023 at 09:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -38,6 +38,7 @@ CREATE TABLE `accounts` (
   `year` varchar(8) NOT NULL DEFAULT '0',
   `section` varchar(20) NOT NULL DEFAULT '0',
   `schoolYear` int(3) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT 0,
   `date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -45,19 +46,19 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `accountType`, `username`, `password`, `first`, `middle`, `last`, `year`, `section`, `schoolYear`, `date_time`) VALUES
-(1, 0, 'admin', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'admin', 'admin', 'admin', '0', '0', 0, '2023-03-06 03:12:45'),
-(2, 1, 'SageGonzales', '$2y$10$/d0fCBrFTjXaEumJPKPgfOrBsLwnrWgxXRydUeogOcGIg8dYGZzre', 'Sage', 'A', 'Gonzales', '0', '0', 0, '2023-03-06 03:12:45'),
-(16, 1, 'RolandRegacho', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'Roland', 'Too', 'Regacho', '0', '0', 0, '2023-03-06 03:12:45'),
-(17, 1, 'RigorAbargos', '$2y$10$vUBl6I8Tp6.aqUOBXVivEOiWTHHbRol2x9Q4cUuAIo33mQz5jCJSu', 'Rigor', '', 'Abargos', '0', '0', 0, '2023-03-06 03:12:45'),
-(21, 2, '20123123', '$2y$10$Tx62tDSYfeInI0VswsvDUOnFJ9/IFk0wISKiSImjynxXUE6XPvOj.', 'sdadasdasdasdsa', 'asd', 'asdadad', 'Grade 2', 'second', 20, '2023-03-06 03:12:45'),
-(22, 2, '20123131', '$2y$10$T8DVW6hr9W45dv6KJubIyeAZY/NLdC.pU5KeifR0wBhkKehrGI1JS', 'ojklljl', 'ljljkjl', 'l', 'Grade 3', 'third', 20, '2023-03-06 03:12:45'),
-(23, 2, '2012323', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'uyyioyiu', 'dsd', 'rtrt', 'Grade 2', 'second', 20, '2023-03-06 03:12:45'),
-(24, 2, '23421234', '$2y$10$au3ItgZhj00Yp.Sc1DVfKuvg3dFFqmaOaJc7mqIInanMYaeNWte8m', 'sdfdf', 'sdda', 'erte', 'Grade 2', 'second', 20, '2023-03-06 03:12:45'),
-(25, 2, '12322323', '$2y$10$y6EF0IKQX6c.EqdC6LQVJusSz9W8agl2sqs6moUtwdYHipQW6Y3Rq', 'hjkhk', 'asd', 'ddg', 'Grade 3', 'third', 20, '2023-03-06 03:12:45'),
-(26, 2, '1232323', '$2y$10$5XkBW74q8DgRWg9m62KYSupTYB9u6kDYEWH/wBlawhpTp2plWRyv.', 'sh', 's', 'to', 'Grade 11', 'eleven', 20, '2023-03-06 03:12:45'),
-(27, 2, 'Subject Code', '$2y$10$G98bY6R3Ute.Zp70sdQh.ejYQbc6ttNRtRmU.RSlsHcIrIzadYfnK', 'Subject Description', '', '', '', '', 20, '2023-03-06 03:12:45'),
-(28, 2, 'Math1', '$2y$10$f10fe38J1AY6uhdr5wy7yOD3vW0UW3q/cx4FfnIUibKIs3DHRy.Xm', 'Mathematics', '', '', '', '', 20, '2023-03-06 03:12:45');
+INSERT INTO `accounts` (`id`, `accountType`, `username`, `password`, `first`, `middle`, `last`, `year`, `section`, `schoolYear`, `is_deleted`, `date_time`) VALUES
+(1, 0, 'admin', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'admin', 'admin', 'admin', '0', '0', 0, 0, '2023-03-06 03:12:45'),
+(2, 1, 'SageGonzales', '$2y$10$/d0fCBrFTjXaEumJPKPgfOrBsLwnrWgxXRydUeogOcGIg8dYGZzre', 'Sage', 'A', 'Gonzales', '0', '0', 0, 0, '2023-03-06 03:12:45'),
+(16, 1, 'RolandRegacho', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'Roland', 'Too', 'Regacho', '0', '0', 0, 0, '2023-03-06 03:12:45'),
+(17, 1, 'RigorAbargos', '$2y$10$vUBl6I8Tp6.aqUOBXVivEOiWTHHbRol2x9Q4cUuAIo33mQz5jCJSu', 'Rigor', '', 'Abargos', '0', '0', 0, 0, '2023-03-06 03:12:45'),
+(21, 2, '20123123', '$2y$10$Tx62tDSYfeInI0VswsvDUOnFJ9/IFk0wISKiSImjynxXUE6XPvOj.', 'sdadasdasdasdsa', 'asd', 'asdadad', 'Grade 2', 'second', 20, 0, '2023-03-06 03:12:45'),
+(22, 2, '20123131', '$2y$10$T8DVW6hr9W45dv6KJubIyeAZY/NLdC.pU5KeifR0wBhkKehrGI1JS', 'ojklljl', 'ljljkjl', 'l', 'Grade 3', 'third', 20, 0, '2023-03-06 03:12:45'),
+(23, 2, '2012323', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 'uyyioyiu', 'dsd', 'rtrt', 'Grade 2', 'second', 20, 0, '2023-03-06 03:12:45'),
+(24, 2, '23421234', '$2y$10$au3ItgZhj00Yp.Sc1DVfKuvg3dFFqmaOaJc7mqIInanMYaeNWte8m', 'sdfdf', 'sdda', 'erte', 'Grade 2', 'second', 20, 0, '2023-03-06 03:12:45'),
+(25, 2, '12322323', '$2y$10$y6EF0IKQX6c.EqdC6LQVJusSz9W8agl2sqs6moUtwdYHipQW6Y3Rq', 'hjkhk', 'asd', 'ddg', 'Grade 3', 'third', 20, 0, '2023-03-06 03:12:45'),
+(26, 2, '1232323', '$2y$10$5XkBW74q8DgRWg9m62KYSupTYB9u6kDYEWH/wBlawhpTp2plWRyv.', 'sh', 's', 'to', 'Grade 11', 'eleven', 20, 0, '2023-03-06 03:12:45'),
+(27, 2, 'Subject Code', '$2y$10$G98bY6R3Ute.Zp70sdQh.ejYQbc6ttNRtRmU.RSlsHcIrIzadYfnK', 'Subject Description', '', '', '', '', 20, 0, '2023-03-06 03:12:45'),
+(28, 2, 'Math1', '$2y$10$f10fe38J1AY6uhdr5wy7yOD3vW0UW3q/cx4FfnIUibKIs3DHRy.Xm', 'Mathematics', '', '', '', '', 20, 0, '2023-03-06 03:12:45');
 
 -- --------------------------------------------------------
 
