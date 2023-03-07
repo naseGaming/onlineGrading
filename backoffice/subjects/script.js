@@ -72,18 +72,46 @@ function editSubject(app) {
 
 function deleteSubject(app) {
     const id = app.id
-
-    GetData("../api/controllers/subjects.php", "id=" + id)
-    .then(response => {
-        if(response.type == "success") {
-            response.content
-
-            showSubjectModal("delete")
+    
+    Swal.fire({
+        title: 'Are you sure you want to delete this subject?',
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: 'No',
+        customClass: {
+          actions: 'my-actions',
+          confirmButton: 'order-1',
+          denyButton: 'order-2',
         }
-        else {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+      }).then((result) => {
+        if (result.isConfirmed) {
+        
+            data = {
+                type: "DELETE",
+                id: id
+            }
+            
+            DeleteData("../api/controllers/subjects.php", data)
+            .then(response => {
+                if(response.type == "success") {
+                    Swal.fire({
+                        icon: response.type,
+                        text: response.message,
+                    })
+                }
+                else if(response.type == "http_error") {
+                    //window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+                }
+                else {
+                    Swal.fire({
+                        icon: response.type,
+                        text: response.message,
+                    })
+                }
+            })
+
         }
-    })
+      })
 }
 
 function populateForm(data = {}) {

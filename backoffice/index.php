@@ -15,6 +15,7 @@
         <script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
         <script src = "../src/jquery/jquery-3.1.1.min.js"></script>
         <script src = "../src/jquery/jquery-ui.min.js"></script>
+        <script src = "//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src = "../src/shared/fetch.js"></script>
         <script src = "../src/shared/pagination.js"></script>
         <script src = "../src/shared/modal.js"></script>

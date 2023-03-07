@@ -6,7 +6,6 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == post) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
-    $key = array_keys($_POST);
 
     //POST LOGIN
     if(isset($data->username) && isset($data->password)) {

@@ -13,9 +13,10 @@ if(strtoupper($requestMethod) == get) {
         $page--;
         $page *= 5;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username ORDER BY s.subjID Limit $page, 5";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 5";
+        $params = ["i", 0];
         
-        $result = SelectExecuteStatement($con, $sql, []);
+        $result = SelectExecuteStatement($con, $sql, $params);
         $subject = array();
     
         $count = 0;
@@ -106,6 +107,28 @@ else if(strtoupper($requestMethod) == put) {
 }
 
 else if(strtoupper($requestMethod) == delete) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    if(isset($data->id)) {
+        $sql = "UPDATE subjects SET is_deleted = ? WHERE subjID = ?";
+        $params = ["ii", 1, $data->id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject deleted successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while deleting subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
