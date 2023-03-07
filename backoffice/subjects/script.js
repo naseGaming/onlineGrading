@@ -59,7 +59,7 @@ function loadTeacherComboBox() {
             $("#subject_teacher").html(row)
         }
         else {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
     })
 }
@@ -76,7 +76,7 @@ function editSubject(app) {
             showSubjectModal("EDIT")
         }
         else {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
     })
 }
@@ -111,7 +111,7 @@ function deleteSubject(app) {
                     })
                 }
                 else if(response.type == "http_error") {
-                    window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+                    window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
                 }
                 else {
                     Swal.fire({
@@ -135,7 +135,7 @@ function submitAddSubject(data = {}) {
             })
         }
         else if(response.type == "http_error") {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
         else {
             Swal.fire({
@@ -158,7 +158,7 @@ function submitEditSubject(data = {}) {
             paginateTable(details)
         }
         else if(response.type == "http_error") {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
         else {
             Swal.fire({
