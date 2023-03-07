@@ -6,7 +6,6 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
-    //GET SUBJECTS
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
