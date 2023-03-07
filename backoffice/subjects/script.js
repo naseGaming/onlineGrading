@@ -1,30 +1,40 @@
-$(() => {
-    const details = {
-        url_page: 1,
-        url: "../api/controllers/subjects.php",
-        method: {
-            edit: "editSubject(this);",
-            delete: "deleteSubject(this);"
-        },
-        table_id: "tblSubjects",
-        current_page: 1
-    }
+const details = {
+    url_page: 1,
+    url: "../api/controllers/subjects.php",
+    method: {
+        edit: "editSubject(this);",
+        delete: "deleteSubject(this);"
+    },
+    table_id: "tblSubjects",
+    current_page: 1
+}
 
+$(() => {
     paginateTable(details)
     loadTeacherComboBox()
+    
+    $("#frmSubject").on("submit", (e) => {
+        e.preventDefault()
+
+        const data = getFormData()
+
+        if(data.action_type == "ADD") {
+            submitAddSubject(data)
+        }
+        else {
+            submitEditSubject(data)
+        }
+    })
 })
 
 function showSubjectModal(type) {
     let title = ""
 
-    if(type == "add") {
+    if(type == "ADD") {
         title = "Add Subject Form"
     }
-    else if(type == "edit") {
-        title = "Edit Subject Form"
-    }
     else {
-        title = "Delete Subject Form"
+        title = "Edit Subject Form"
     }
 
     let data = {
@@ -40,7 +50,7 @@ function loadTeacherComboBox() {
     GetData("../api/controllers/teachers.php", "")
     .then(response => {
         if(response.type == "success") {
-            let row = `<option value = "0">~Please Select a Teacher~</option>`
+            let row = `<option value = "">~Please Select a Teacher~</option>`
 
             for(let items in response.content) {
                 row += `<option value = "${response.content[items].username}">${response.content[items].first_name} ${response.content[items].middle_name} ${response.content[items].last_name}</option>`
@@ -61,8 +71,9 @@ function editSubject(app) {
     .then(response => {
         if(response.type == "success") {
             populateForm(response.content)
-            
-            showSubjectModal("edit")
+
+            $("#subject_id_for_edit").val(id)
+            showSubjectModal("EDIT")
         }
         else {
             window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
@@ -111,7 +122,52 @@ function deleteSubject(app) {
             })
 
         }
-      })
+    })
+}
+
+function submitAddSubject(data = {}) {
+    PostData("../api/controllers/subjects.php", data)
+    .then(response => {
+        if(response.type == "success") {
+            Swal.fire({
+                icon: response.type,
+                text: response.message,
+            })
+        }
+        else if(response.type == "http_error") {
+            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+        }
+        else {
+            Swal.fire({
+                icon: response.type,
+                text: response.message,
+            })
+        }
+        closeModal()
+    })
+}
+
+function submitEditSubject(data = {}) {
+    PutData("../api/controllers/subjects.php", data)
+    .then(response => {
+        if(response.type == "success") {
+            Swal.fire({
+                icon: response.type,
+                text: response.message,
+            })
+            paginateTable(details)
+        }
+        else if(response.type == "http_error") {
+            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+        }
+        else {
+            Swal.fire({
+                icon: response.type,
+                text: response.message,
+            })
+        }
+        closeModal()
+    })
 }
 
 function populateForm(data = {}) {
@@ -119,4 +175,26 @@ function populateForm(data = {}) {
     $("#subject_description").val(data.description)
     $("#subject_year").val(data.year).change()
     $("#subject_teacher").val(data.teacher).change()
+}
+
+function getFormData() {
+    const data = {
+        action_type: $("#subject_modal_action").val(),
+        subject_id: $("#subject_id_for_edit").val(),
+        subject_code: $("#subject_code").val(),
+        subject_description: $("#subject_description").val(),
+        subject_year: $("#subject_year").val(),
+        subject_teacher: $("#subject_teacher").val()
+    }
+
+    return data;
+}
+
+function clearFormData() {
+    $("#subject_modal_action").val("")
+    $("#subject_id_for_edit").val("")
+    $("#subject_code").val("")
+    $("#subject_description").val("")
+    $("#subject_year").val("")
+    $("#subject_teacher").val("")
 }

@@ -4,5 +4,6 @@ function showModal(data = {}) {
 }
 
 function closeModal() {
+    clearFormData()
     $(".modal").hide()
 }

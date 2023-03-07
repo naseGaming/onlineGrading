@@ -98,10 +98,55 @@ if(strtoupper($requestMethod) == get) {
 }
 
 else if(strtoupper($requestMethod) == post) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    if($data->action_type == "ADD") {
+        $sql = "INSERT INTO `subjects`(`subjcode`, `subjdesc`, `year`, `teacher`) VALUES (?,?,?,?)";
+        $params = ["ssss", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject added successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while adding the subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
+
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == put) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    if(isset($data->subject_id)) {
+        $sql = "UPDATE subjects SET subjcode = ?, subjdesc = ?, year = ?, teacher = ? WHERE subjID = ?";
+        $params = ["ssssi", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher, $data->subject_id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject updated successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while updating the subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
@@ -123,7 +168,7 @@ else if(strtoupper($requestMethod) == delete) {
         else {
             $result = array(
                 "type" => "error",
-                "message" => "An error occured while deleting subject!"
+                "message" => "An error occured while deleting the subject!"
             );
         }
 

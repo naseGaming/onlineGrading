@@ -1,5 +1,5 @@
 <div class = "page_header">
-    <button class = "blue-b white-f" onclick = "showSubjectModal('add')">Add</button>
+    <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
 </div>
 <table id = "tblSubjects">
     <thead>
@@ -23,15 +23,16 @@
         <p>Title</p>
     </div>
     <div class = "modal-content">
-        <form>
-            <input type = "hidden" id = "subject_modal_action" value = "add" />
+        <form id = "frmSubject">
+            <input type = "hidden" id = "subject_modal_action" value = "ADD" />
+            <input type = "hidden" id = "subject_id_for_edit" value = "" />
             <div class = "form_group">
                 <label>Subject Code</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "subject_code">
+                    <input type = "text" id = "subject_code" required>
                 </div>
             </div>
             <div class = "form_group">
@@ -40,7 +41,7 @@
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "subject_description">
+                    <input type = "text" id = "subject_description" required>
                 </div>
             </div>
             <div class = "form_group">
@@ -49,8 +50,8 @@
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <select id = "subject_year">
-                        <option value = "0">~Please Select a Year~</option>
+                    <select id = "subject_year" required>
+                        <option value = "">~Please Select a Year~</option>
                         <option>Grade 1</option>
                         <option>Grade 2</option>
                         <option>Grade 3</option>
@@ -72,7 +73,7 @@
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <select id = "subject_teacher" >
+                    <select id = "subject_teacher" required>
                         
                     </select>
                 </div>
