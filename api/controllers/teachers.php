@@ -48,9 +48,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 5;
+        $page *= 10;
 
-        $sql = "SELECT username, first, middle, last FROM accounts WHERE is_deleted = ? and accountType = ? Limit $page, 5";
+        $sql = "SELECT username, first, middle, last FROM accounts WHERE is_deleted = ? and accountType = ? Limit $page, 10";
         $params = ["ii", 0, 1];
         
         $result = SelectExecuteStatement($con, $sql, $params);

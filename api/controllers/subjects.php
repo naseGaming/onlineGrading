@@ -10,9 +10,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 5;
+        $page *= 10;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 5";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 10";
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

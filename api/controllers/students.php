@@ -10,9 +10,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 5;
+        $page *= 10;
 
-        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM studentlist WHERE is_deleted = ? Limit $page, 5";
+        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM studentlist WHERE is_deleted = ? Limit $page, 10";
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

@@ -109,6 +109,7 @@ function deleteSubject(app) {
                         icon: response.type,
                         text: response.message,
                     })
+                    paginateTable(details)
                 }
                 else if(response.type == "http_error") {
                     window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
@@ -133,6 +134,7 @@ function submitAddSubject(data = {}) {
                 icon: response.type,
                 text: response.message,
             })
+            paginateTable(details)
         }
         else if(response.type == "http_error") {
             window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
