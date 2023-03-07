@@ -60,8 +60,8 @@ function editSubject(app) {
     GetData("../api/controllers/subjects.php", "id=" + id)
     .then(response => {
         if(response.type == "success") {
-            response.content
-
+            populateForm(response.content)
+            
             showSubjectModal("edit")
         }
         else {
@@ -100,7 +100,7 @@ function deleteSubject(app) {
                     })
                 }
                 else if(response.type == "http_error") {
-                    //window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+                    window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
                 }
                 else {
                     Swal.fire({
@@ -119,6 +119,4 @@ function populateForm(data = {}) {
     $("#subject_description").val(data.description)
     $("#subject_year").val(data.year).change()
     $("#subject_teacher").val(data.teacher).change()
-
-    console.log($("#subject_teacher").val())
 }
