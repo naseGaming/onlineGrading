@@ -36,8 +36,8 @@ if(strtoupper($requestMethod) == get) {
             $count++;
         }
         
-        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects";
-        $result = SelectExecuteStatement($con, $sql, []);
+        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects WHERE is_deleted = ?";
+        $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
         while($row = $result -> fetch_assoc()) {

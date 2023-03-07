@@ -10,6 +10,18 @@
 .white-b {
     background: rgb(255, 255, 255);
 }
+.yellow-b {
+    background: rgba(200, 200, 50, 1);
+}
+.magenta-b {
+    background: rgba(200, 50, 200, 1);
+}
+.cyan-b {
+    background: rgba(50, 200, 200, 1);
+}
+.violet-b {
+    background: rgb(104, 6, 104);
+}
 .black-b {
     background: rgba(50, 50, 50, 1);
 }
