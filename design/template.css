@@ -137,7 +137,7 @@ button {
 table {
     border-collapse: collapse;
     width: 100%;
-    min-width: 800px;
+    min-width: 600px;
     border: 2px solid gray;
 }
 
@@ -151,6 +151,7 @@ th, td {
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
+    white-space: nowrap;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
@@ -158,6 +159,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 th {
     background: rgba(50, 150, 50, 1);
     color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .table_button {
@@ -179,7 +182,7 @@ th {
     float: left;
     height: 8vh;
     width: 80%;
-    min-width: 800px;
+    min-width: 600px;
     margin-left: 10%;
 }
 
@@ -356,15 +359,28 @@ footer {
 }
 
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
+    .page_header {
+        width: 80vw;
+        margin-left: 10vw;
+    }
+    
+    .table_responsive {
+        width: 80vw;
+        margin-left: 10vw;
+        overflow-x: scroll;
+    }
+
+    .tblPage {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
     .page_header {
         width: 100vw;
         margin-left: 0;
-    }
-
-    .page_header button {
-        margin-left: 10px;
-        margin-right: 0;
     }
     
     .table_responsive {
@@ -375,6 +391,10 @@ footer {
 
     table {
         width: auto;
+    }
+
+    th, td {
+        white-space: nowrap;
     }
 
     .tblPage {
