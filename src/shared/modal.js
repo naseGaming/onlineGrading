@@ -1,9 +1,27 @@
+$(() => {
+    let existing = $("body").html()
+
+    existing += "<div class = 'loading'></div>"
+
+    $("body").html(existing)
+
+    $(".loading").click(() => {
+        closeModal()
+    })
+})
+
 function showModal(data = {}) {
     $("#" + data.id + " .modal-header p").html(data.title)
-    $("#" + data.id).show()
+    $.when($(".loading").show())
+    .done(() => {
+        $("#" + data.id).slideDown()
+    })
 }
 
 function closeModal() {
     clearFormData()
-    $(".modal").hide()
+    $.when($(".loading").hide())
+    .done(() => {
+        $(".modal").slideUp()
+    })
 }

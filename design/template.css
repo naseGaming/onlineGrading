@@ -230,7 +230,7 @@ footer {
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    z-index: 5;
+    z-index: 6;
     display: none;
 }
 
@@ -359,6 +359,14 @@ footer {
     color: white;
 }
 
+.loading {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(50, 50, 50, 0.9);
+    z-index:5;
+    display: none;
+}
 
 @media only screen and (max-width: 1000px) {
     .page_header {
