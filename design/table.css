@@ -51,6 +51,10 @@
 .container td:first-child { color: #FB667A; }
 */
 
+.container .test {
+    width: 200px;
+}
+
 .container tr:hover {
    background-color: #464A52;
 -webkit-box-shadow: 0 6px 6px -6px #0E1119;
@@ -73,7 +77,3 @@
   transition-timing-function: line;
 }
 */
-@media (max-width: 800px) {
-.container td:nth-child(4),
-.container th:nth-child(4) { display: none; }
-}
