@@ -1,5 +1,5 @@
 <div class = "page_header">
-    <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
+    <button class = "blue-b white-f" onclick = "showTeacherModal('ADD')">Add</button>
 </div>
 
 <div class = "table_responsive" >
@@ -16,5 +16,48 @@
     </table>
     <div class = "tblPage" id = "tblTeachers-page">
     
+    </div>
+</div>
+
+<div class = "modal" id = "teacher_modal">
+    <div class = "modal-header">
+        <p>Title</p>
+    </div>
+    <div class = "modal-content">
+        <form id = "frmTeacher">
+            <input type = "hidden" id = "teacher_modal_action" value = "ADD" />
+            <input type = "hidden" id = "teacher_id_for_edit" value = "" />
+            <div class = "form_group">
+                <label>First Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "first_name" required style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Middle Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "middle_name" style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Last Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "last_name" required style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <input class = "button_form" type = "submit" value = "Submit" />
+        </form>
+    </div>
+    <div class = "modal-footer">
+        <button onclick = "closeModal();">Close</button>
     </div>
 </div>

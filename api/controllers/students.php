@@ -6,6 +6,7 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
+    //SERVER SIDE GET METHOD FOR STUDENTS TO BE DISPLAYED IN A TABLE
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
 

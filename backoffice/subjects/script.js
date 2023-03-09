@@ -31,6 +31,7 @@ function showSubjectModal(type) {
     let title = ""
 
     if(type == "ADD") {
+        clearFormData()
         title = "Add Subject Form"
     }
     else {
@@ -145,6 +146,7 @@ function submitAddSubject(data = {}) {
                 text: response.message,
             })
         }
+        clearFormData()
         closeModal()
     })
 }
@@ -168,6 +170,7 @@ function submitEditSubject(data = {}) {
                 text: response.message,
             })
         }
+        clearFormData()
         closeModal()
     })
 }

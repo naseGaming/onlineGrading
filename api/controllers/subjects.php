@@ -6,6 +6,7 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
+    //SERVER SIDE GET METHOD FOR SUBJECTS TO BE DISPLAYED IN A TABLE
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
@@ -59,6 +60,7 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    //GET METHOD FOR SUBJECTS USING SPECIFIC ID
     if(isset($_GET["id"])) {
         $id = $_GET["id"];
 
@@ -100,6 +102,7 @@ else if(strtoupper($requestMethod) == post) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
+    //INSERT SUBJECTS
     if($data->action_type == "ADD") {
         $sql = "INSERT INTO `subjects`(`subjcode`, `subjdesc`, `year`, `teacher`) VALUES (?,?,?,?)";
         $params = ["ssss", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher];
@@ -127,6 +130,7 @@ else if(strtoupper($requestMethod) == put) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
+    //UPDATE SUBJECTS
     if(isset($data->subject_id)) {
         $sql = "UPDATE subjects SET subjcode = ?, subjdesc = ?, year = ?, teacher = ? WHERE subjID = ?";
         $params = ["ssssi", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher, $data->subject_id];
@@ -154,6 +158,7 @@ else if(strtoupper($requestMethod) == delete) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
+    //DELETE SUBJECTS
     if(isset($data->id)) {
         $sql = "UPDATE subjects SET is_deleted = ? WHERE subjID = ?";
         $params = ["ii", 1, $data->id];

@@ -19,7 +19,6 @@ function showModal(data = {}) {
 }
 
 function closeModal() {
-    clearFormData()
     $.when($(".loading").hide())
     .done(() => {
         $(".modal").slideUp()
