@@ -12,3 +12,7 @@ const details = {
 $(() => {
     paginateTable(details)
 })
+
+function exportTemplate() {
+    window.open("../api/export/?type=students");
+}

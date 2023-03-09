@@ -1,9 +1,10 @@
 $(() => {
 	let url = window.location.search.substring(1)
 	let urlMessage = url.split("&")
+    console.log(urlMessage)
 
-    let error_code = urlMessage[1].split("=")
-    let error_text = urlMessage[2].split("=")
+    let error_code = urlMessage[0].split("=")
+    let error_text = urlMessage[1].split("=")
 
     let error_code_to_display = error_code[1].split("")
     let render = ""
