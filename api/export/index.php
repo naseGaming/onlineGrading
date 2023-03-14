@@ -26,9 +26,9 @@ if(isset($_SESSION["userName"])) {
         fclose($fp);
     }
     else {
-        header("location: ../redirect.php?code=403&message=Not Allowed");
+        header("location: ../redirect.php?code=403&message=Forbidden");
     }
 }
 else {
-    header("location: ../redirect.php?code=403&message=Not Allowed");
+    header("location: ../redirect.php?code=403&message=Forbidden");
 }
