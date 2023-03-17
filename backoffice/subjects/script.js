@@ -183,7 +183,7 @@ function populateForm(data = {}) {
 }
 
 function getFormData() {
-    const data = {
+    return data = {
         action_type: $("#subject_modal_action").val(),
         subject_id: $("#subject_id_for_edit").val(),
         subject_code: $("#subject_code").val(),
@@ -191,8 +191,6 @@ function getFormData() {
         subject_year: $("#subject_year").val(),
         subject_teacher: $("#subject_teacher").val()
     }
-
-    return data;
 }
 
 function clearFormData() {

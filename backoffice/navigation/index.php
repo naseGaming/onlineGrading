@@ -20,6 +20,11 @@ $items = array(
         "name" => "Teachers",
         "data-icon" => "fa-solid fa-chalkboard-user",
         "link" => "./?teachers"
+    ),
+    array(
+        "name" => "Sections",
+        "data-icon" => "fa-solid fa-people-group",
+        "link" => "./?sections"
     )
 );
 ?>
