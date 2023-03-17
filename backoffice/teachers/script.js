@@ -58,7 +58,7 @@ function editTeacher(app) {
             showTeacherModal("EDIT")
         }
         else {
-            //window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
     })
 }
