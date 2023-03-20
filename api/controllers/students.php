@@ -26,6 +26,7 @@ if(strtoupper($requestMethod) == get) {
             $flag = true;
     
             $subject[$count] = array (
+                "id" => $row["studentNumber"],
                 "student_number" => $row["studentNumber"],
                 "full_name" => $row["first"] . " " . $row["middle"] . " " . $row["last"],
                 "year" => $row["year"],

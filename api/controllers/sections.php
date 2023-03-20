@@ -34,21 +34,174 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    //SERVER SIDE GET METHOD FOR SECTIONS TO BE DISPLAYED IN A TABLE
+    if(isset($_GET["page"])) {
+        $page = $_GET["page"];
+
+        $page--;
+        $page *= 10;
+
+        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? Limit $page, 10";
+        $params = ["i", 0];
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $subject = array();
+    
+        $count = 0;
+        $flag = false;
+    
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+    
+            $subject[$count] = array (
+                "id" => $row["sectionID"],
+                "section" => $row["section"],
+                "year" => $row["year"]
+            );
+    
+            $count++;
+        }
+        
+        $sql = "SELECT COUNT(sectionID) AS max_count FROM sections WHERE is_deleted = ?";
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $length = 0;
+
+        while($row = $result -> fetch_assoc()) {
+            $length = $row["max_count"];
+        }
+    
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "length" => $length,
+                "content" => $subject
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "No student to display!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
+    //GET METHOD FOR SECTION USING SPECIFIC ID
+    if(isset($_GET["id"])) {
+        $id = $_GET["id"];
+
+        $sql = "SELECT section, year FROM sections WHERE sectionID = ?";
+        $params = ["i", $id];
+        $section = array();
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $flag = false;
+
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+
+            $section = array(
+                "section_name" => $row["section"],
+                "section_year" => $row["year"]
+            );
+        }
+
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "content" => $section
+            );
+        }
+        else {
+            error("Bad Request", "HTTP/1.1 403 Bad Request");
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == post) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //INSERT SECTIONS
+    if($data->action_type == "ADD") {
+        $sql = "INSERT INTO `sections`(`section`, `year`) VALUES (?,?)";
+        $params = ["ss", $data->section_name, $data->section_year];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Section added successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while adding the section!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == put) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //UPDATE SECTIONS
+    if(isset($data->section_id)) {
+        $sql = "UPDATE sections SET section = ?, year = ? WHERE sectionID = ?";
+        $params = ["ssi", $data->section_name, $data->section_year, $data->section_id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Section updated successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while updating the section!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == delete) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //DELETE SECTIONS
+    if(isset($data->id)) {
+        $sql = "UPDATE sections SET is_deleted = ? WHERE sectionID = ?";
+        $params = ["ii", 1, $data->id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Section deleted successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while deleting the section!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
