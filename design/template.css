@@ -127,6 +127,22 @@ button {
     background: rgba(50, 50, 50, 1);
 }
 
+.page_header select {
+    float: left;
+    width: auto;
+    height: 5vh;
+    margin-top: 2vh;
+    margin-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.page_header select option {
+    font-size: padding 5px;
+}
+
 .table_responsive {
     float: left;
     height: auto;
@@ -377,7 +393,7 @@ footer {
     .table_responsive {
         width: 80vw;
         margin-left: 10vw;
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     .tblPage {
@@ -395,7 +411,7 @@ footer {
     .table_responsive {
         width: 100vw;
         margin-left: 0;
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     table {

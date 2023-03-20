@@ -61,6 +61,44 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    //GET METHOD BY STUDENT_NUMBER
+    if(isset($_GET["getYearLevel"])) {
+        $student_number = $_SESSION["userName"];
+
+        $sql = "SELECT first, middle, last, year, section, schoolYear FROM studentlist WHERE studentNumber = ? ";
+        $params = ["s", $student_number];
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $student = array();
+    
+        $count = 0;
+        $flag = false;
+    
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+    
+            $student = array (
+                "full_name" => $row["first"] . " " . $row["middle"] . " " . $row["last"],
+                "year" => $row["year"],
+                "section" => $row["section"],
+                "school_year" => $row["schoolYear"]
+            );
+    
+            $count++;
+        }
+
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "content" => $student
+            );
+        }
+        else {
+            error("Bad Request", "HTTP/1.1 403 Bad Request");
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
