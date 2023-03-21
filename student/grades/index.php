@@ -1,5 +1,5 @@
 <div class = "page_header">
-        <select id = "">
+        <select onchange = "getGradeByYear(this);">
             <option value = "">Select a Year</option>
             <?php
                 $date = date("Y");
@@ -12,18 +12,6 @@
 </div>
 
 <div class = "table_responsive" >
-    <table id = "tblGrades_Senior" class = "container">
-        <thead>
-            <tr>
-                <th>Subject Description</th>
-                <th>First Semester</th>
-                <th>Second Semester</th>
-                <th>Final Grade</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
     <table id = "tblGrades" class = "container">
         <thead>
             <tr>

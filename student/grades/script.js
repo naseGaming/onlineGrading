@@ -1,25 +1,63 @@
 $(() => {
-    getYearLevel()
+    getGrades()
 })
 
-function getYearLevel() {
-    GetData("../api/controllers/students.php", "getYearLevel")
+function getGrades() {
+    let row = ""
+
+    GetData("../api/controllers/grades.php")
     .then(response => {
         if(response.type == "success") {
-            let data = ""
+            row += `<tr>`
+            Object.keys(response.content).forEach(function(key) {
+                var value = response.content[key];
 
-            if(response.content.year == "Grade 11" || response.content.year == "Grade 12") {
-                $("#tblGrades_Senior").show()
+                if(key != "description") {
+                    if(value > 79) {
+                        row += `
+                        <td class = "high_pass">
+                            ${value}
+                        </td>`
+                    }
+                    else if(value < 80 && value > 74) {
+                        row += `
+                        <td class = "passing">
+                            ${value}
+                        </td>`
+                    }
+                    else if(value == "N/A") {
+                        row += `
+                        <td>
+                            ${value}
+                        </td>`
+                    }
+                    else {
+                        row += `
+                        <td class = "failed">
+                            ${value}
+                        </td>`
+                    }
+                }
+                else {
+                    row += `
+                    <td>
+                        ${value}
+                    </td>`
+                }
+            });
+            row += `</tr>`
 
-                data = "tblGrades_Senior"
-            }
-            else {
-                $("#tblGrades").show()
+            $("#tblGrades tbody").html(row)
+        }
+        else if(response.type == "empty") {
+            row += `
+            <tr>
+                <td colspan = "6">
+                    You have no subjects this year
+                </td>
+            </tr>`
 
-                data = "tblGrades"
-            }
-
-            renderGrade(data)
+            $("#tblGrades tbody").html(row)
         }
         else {
             window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
@@ -27,5 +65,66 @@ function getYearLevel() {
     })
 }
 
-function renderGrade(id) {
+function getGradeByYear(app) {
+    let year = app.value
+    let row = ""
+
+    GetData("../api/controllers/grades.php", "year=" + year)
+    .then(response => {
+        if(response.type == "success") {
+            row += `<tr>`
+            Object.keys(response.content).forEach(function(key) {
+                var value = response.content[key];
+
+                if(key != "description") {
+                    if(value > 79) {
+                        row += `
+                        <td class = "high_pass">
+                            ${value}
+                        </td>`
+                    }
+                    else if(value < 80 && value > 74) {
+                        row += `
+                        <td class = "passing">
+                            ${value}
+                        </td>`
+                    }
+                    else if(value == "N/A") {
+                        row += `
+                        <td>
+                            ${value}
+                        </td>`
+                    }
+                    else {
+                        row += `
+                        <td class = "failed">
+                            ${value}
+                        </td>`
+                    }
+                }
+                else {
+                    row += `
+                    <td>
+                        ${value}
+                    </td>`
+                }
+            });
+            row += `</tr>`
+
+            $("#tblGrades tbody").html(row)
+        }
+        else if(response.type == "empty") {
+            row += `
+            <tr>
+                <td colspan = "6">
+                    You have no subjects this year
+                </td>
+            </tr>`
+
+            $("#tblGrades tbody").html(row)
+        }
+        else {
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
+        }
+    })
 }
