@@ -7,6 +7,7 @@ $(() => {
 
     $(".loading").click(() => {
         closeModal()
+        hideSideBar()
     })
 })
 
