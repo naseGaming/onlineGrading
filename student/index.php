@@ -7,12 +7,12 @@
 
 <!DOCTYPE html>
     <head>
-        <title>Backoffice</title>
+        <title>Student Portal</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../design/colors.css" />
         <link rel="stylesheet" type="text/css" href="../design/error_pages.css" />
         <link rel="stylesheet" type="text/css" href="../design/template.css" />
-        <link rel="stylesheet" type="text/css" href="../design/backoffice.css" />
+        <link rel="stylesheet" type="text/css" href="../design/student.css" />
         <link rel="stylesheet" type="text/css" href="../design/table.css" />
         <script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
         <script src = "../src/jquery/jquery-3.1.1.min.js"></script>
@@ -21,7 +21,7 @@
         <script src = "../src/shared/fetch.js"></script>
         <script src = "../src/shared/pagination.js"></script>
         <script src = "../src/shared/modal.js"></script>
-        <script src = "../src/backoffice/script.js"></script>
+        <script src = "../src/student/script.js"></script>
         <script src = "navigation/script.js"></script>
         <?php
             if(count($key) == 0 ) {
@@ -58,8 +58,12 @@
                 $content = $key[0]."/index.html";
 
                 if(!file_exists($content)){
-                    echo "<script>window.location.href = './?error_pages&code=404&message=Not%20Found'</script>";
-                    return;
+                    $content = $key[0]."/index.php";
+
+                    if(!file_exists($content)){
+                        echo "<script>window.location.href = './?error_pages&code=404&message=Not%20Found'</script>";
+                        return;
+                    }
                 }
 
                 require($content);

@@ -1,61 +1,61 @@
 const details = {
     url_page: 1,
-    url: "../api/controllers/teachers.php",
+    url: "../api/controllers/sections.php",
     method: {
-        edit: "editTeacher(this);",
-        delete: "deleteTeacher(this);"
+        edit: "editSection(this);",
+        delete: "deleteSection(this);"
     },
-    table_id: "tblTeachers",
+    table_id: "tblSections",
     current_page: 1
 }
 
 $(() => {
     paginateTable(details)
     
-    $("#frmTeacher").on("submit", (e) => {
+    $("#frmSection").on("submit", (e) => {
         e.preventDefault()
 
         const data = getFormData()
 
         if(data.action_type == "ADD") {
-            submitAddTeacher(data)
+            submitAddSection(data)
         }
         else {
-            submitEditTeacher(data)
+            submitEditSection(data)
         }
     })
 })
 
-function showTeacherModal(type) {
+function showSectionModal(type) {
     let title = ""
 
     if(type == "ADD") {
         clearFormData()
-        title = "Add Teacher Form"
+        title = "Add Subject Form"
     }
     else {
-        title = "Edit Teacher Form"
+        title = "Edit Subject Form"
     }
 
     let data = {
-        id: "teacher_modal",
+        id: "section_modal",
         title: title
     }
 
-    $("#teacher_modal_action").val(type)
+    $("#section_modal_action").val(type)
     showModal(data)
 }
 
-function editTeacher(app) {
+function editSection(app) {
     const id = app.id
 
-    GetData("../api/controllers/teachers.php", "id=" + id)
+    GetData("../api/controllers/sections.php", "id=" + id)
     .then(response => {
         if(response.type == "success") {
             populateForm(response.content)
 
-            $("#teacher_id_for_edit").val(id)
-            showTeacherModal("EDIT")
+            $("#section_id_for_edit").val(id)
+            showSectionModal("EDIT")
         }
         else {
             window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
@@ -63,11 +63,11 @@ function editTeacher(app) {
     })
 }
 
-function deleteTeacher(app) {
+function deleteSection(app) {
     const id = app.id
     
     Swal.fire({
-        title: 'Are you sure you want to delete this teacher?',
+        title: 'Are you sure you want to delete this section?',
         showDenyButton: true,
         confirmButtonText: 'Yes',
         denyButtonText: 'No',
@@ -84,7 +84,7 @@ function deleteTeacher(app) {
                 id: id
             }
             
-            DeleteData("../api/controllers/teachers.php", data)
+            DeleteData("../api/controllers/sections.php", data)
             .then(response => {
                 if(response.type == "success") {
                     Swal.fire({
@@ -108,8 +108,8 @@ function deleteTeacher(app) {
     })
 }
 
-function submitAddTeacher(data = {}) {
-    PostData("../api/controllers/teachers.php", data)
+function submitAddSection(data = {}) {
+    PostData("../api/controllers/sections.php", data)
     .then(response => {
         if(response.type == "success") {
             Swal.fire({
@@ -132,8 +132,8 @@ function submitAddTeacher(data = {}) {
     })
 }
 
-function submitEditTeacher(data = {}) {
-    PutData("../api/controllers/teachers.php", data)
+function submitEditSection(data = {}) {
+    PutData("../api/controllers/sections.php", data)
     .then(response => {
         if(response.type == "success") {
             Swal.fire({
@@ -157,31 +157,22 @@ function submitEditTeacher(data = {}) {
 }
 
 function populateForm(data = {}) {
-    $("#first_name").val(data.first_name)
-    $("#middle_name").val(data.middle_name)
-    $("#last_name").val(data.last_name)
+    $("#section_name").val(data.section_name)
+    $("#year_level").val(data.section_year).change()
 }
 
 function getFormData() {
-    const data = {
-        action_type: $("#teacher_modal_action").val(),
-        teacher_id: $("#teacher_id_for_edit").val(),
-        first_name: $("#first_name").val(),
-        middle_name: $("#middle_name").val(),
-        last_name: $("#last_name").val()
+    return data = {
+        action_type: $("#section_modal_action").val(),
+        section_id: $("#section_id_for_edit").val(),
+        section_name: $("#section_name").val(),
+        section_year: $("#year_level").val(),
     }
-
-    data.first_name = data.first_name.charAt(0).toUpperCase() + data.first_name.slice(1)
-    data.middle_name = data.middle_name.charAt(0).toUpperCase() + data.middle_name.slice(1)
-    data.last_name = data.last_name.charAt(0).toUpperCase() + data.last_name.slice(1)
-
-    return data;
 }
 
 function clearFormData() {
-    $("#teacher_modal_action").val("")
-    $("#teacher_id_for_edit").val("")
-    $("#first_name").val("")
-    $("#middle_name").val("")
-    $("#last_name").val("")
+    $("#section_modal_action").val("")
+    $("#section_id_for_edit").val("")
+    $("#section_name").val("")
+    $("#year_level").val("")
 }

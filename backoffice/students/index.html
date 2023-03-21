@@ -1,1 +1,111 @@
-This is students
+<div class = "page_header">
+    <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
+    <button class = "yellow-b white-f" onclick = "showSubjectModal('ADD')">Import</button>
+    <button class = "violet-b white-f" onclick = "exportTemplate()">Export Template</button>
+</div>
+
+<div class = "table_responsive" >
+    <table id = "tblStudents" class = "container">
+        <thead>
+            <tr>
+                <th>Student Number</th>
+                <th>Student Name</th>
+                <th>Year Level</th>
+                <th>Section</th>
+                <th>School Year</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class = "tblPage" id = "tblStudents-page">
+    
+    </div>
+</div>
+
+<div class = "modal" id = "student_modal">
+    <div class = "modal-header">
+        <p>Title</p>
+    </div>
+    <div class = "modal-content">
+        <form id = "frmStudent">
+            <input type = "hidden" id = "student_modal_action" value = "ADD" />
+            <input type = "hidden" id = "student_id_for_edit" value = "" />
+            <div class = "form_group">
+                <label>Student Number</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "student_number" required>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>First Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "first_name" required style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Middle Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "middle_name" style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Last Name</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <input type = "text" id = "last_name" required style = "text-transform: capitalize;">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Year Level</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "student_year_level" required onchange = "LoadSectionPerYear(this);">
+                        <option value = "">~Please Select a Year~</option>
+                        <option>Grade 1</option>
+                        <option>Grade 2</option>
+                        <option>Grade 3</option>
+                        <option>Grade 4</option>
+                        <option>Grade 5</option>
+                        <option>Grade 6</option>
+                        <option>Grade 7</option>
+                        <option>Grade 8</option>
+                        <option>Grade 9</option>
+                        <option>Grade 10</option>
+                        <option>Grade 11</option>
+                        <option>Grade 12</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Section</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "student_section" required disabled>
+                        <option value = "">~Please Select a Section~</option>
+                    </select>
+                </div>
+            </div>
+            <input class = "button_form" type = "submit" value = "Submit" />
+        </form>
+    </div>
+    <div class = "modal-footer">
+        <button onclick = "closeModal();">Close</button>
+    </div>
+</div>

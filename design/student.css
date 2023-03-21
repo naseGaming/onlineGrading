@@ -1,0 +1,11 @@
+.high_pass {
+    color: rgba(50, 200, 50, 1) !important;
+}
+
+.passing {
+    color: rgba(200, 200, 50, 1) !important;
+}
+
+.failed {
+    color: rgba(200, 50, 50, 1) !important;
+}

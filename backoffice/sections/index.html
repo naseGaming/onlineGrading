@@ -1,59 +1,48 @@
 <div class = "page_header">
-    <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
+    <button class = "blue-b white-f" onclick = "showSectionModal('ADD')">Add</button>
 </div>
 
 <div class = "table_responsive" >
-    <table id = "tblSubjects" class = "container">
+    <table id = "tblSections" class = "container">
         <thead>
             <tr>
-                <th>Subject Code</th>
-                <th>Subject Description</th>
+                <th>Section Name</th>
                 <th>Year</th>
-                <th>Teacher</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-    <div class = "tblPage" id = "tblSubjects-page">
+    <div class = "tblPage" id = "tblSections-page">
     
     </div>
 </div>
 
-<div class = "modal" id = "subject_modal">
+<div class = "modal" id = "section_modal">
     <div class = "modal-header">
         <p>Title</p>
     </div>
     <div class = "modal-content">
-        <form id = "frmSubject">
-            <input type = "hidden" id = "subject_modal_action" value = "ADD" />
-            <input type = "hidden" id = "subject_id_for_edit" value = "" />
+        <form id = "frmSection">
+            <input type = "hidden" id = "section_modal_action" value = "ADD" />
+            <input type = "hidden" id = "section_id_for_edit" value = "" />
             <div class = "form_group">
-                <label>Subject Code</label>
+                <label>Section Name</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "subject_code" required>
+                    <input type = "text" id = "section_name" required>
                 </div>
             </div>
             <div class = "form_group">
-                <label>Subject Description</label>
+                <label>Year Level</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "subject_description" required>
-                </div>
-            </div>
-            <div class = "form_group">
-                <label>Year</label>
-                <div class = "input_group">
-                    <div class = "input_icon">
-                        <i class="fas fa-font"></i>
-                    </div>
-                    <select id = "subject_year" required>
+                    <select id = "year_level" required>
                         <option value = "">~Please Select a Year~</option>
                         <option>Grade 1</option>
                         <option>Grade 2</option>
@@ -67,17 +56,6 @@
                         <option>Grade 10</option>
                         <option>Grade 11</option>
                         <option>Grade 12</option>
-                    </select>
-                </div>
-            </div>
-            <div class = "form_group">
-                <label>Teacher</label>
-                <div class = "input_group">
-                    <div class = "input_icon">
-                        <i class="fas fa-font"></i>
-                    </div>
-                    <select id = "subject_teacher" required>
-                        
                     </select>
                 </div>
             </div>

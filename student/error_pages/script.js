@@ -1,10 +1,9 @@
 $(() => {
 	let url = window.location.search.substring(1)
 	let urlMessage = url.split("&")
-    console.log(urlMessage)
 
-    let error_code = urlMessage[0].split("=")
-    let error_text = urlMessage[1].split("=")
+    let error_code = urlMessage[1].split("=")
+    let error_text = urlMessage[2].split("=")
 
     let error_code_to_display = error_code[1].split("")
     let render = ""
@@ -17,7 +16,7 @@ $(() => {
     $("#error_code").html(render)
     switch(parseInt(error_code[1])) {
         case 403: {
-            message = "Houston, we don't have enough clearance for that over."
+            message = "Houston, we can not commit to that unholy request over."
             break
         }
         case 404: {

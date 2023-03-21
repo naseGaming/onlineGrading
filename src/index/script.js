@@ -37,7 +37,7 @@ $(() => {
                 }, 2000)
             }
             else if(response.type == "http_error") {
-                window.location.href = "./error_pages/?code=" + response.code + "&message=" + response.message;
+                window.location.href = `./error_pages/?code=${response.code}&message=${response.message}`;
             }
             else {
                 Swal.fire({

@@ -6,14 +6,14 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
-    //GET SUBJECTS
+    //SERVER SIDE GET METHOD FOR SUBJECTS TO BE DISPLAYED IN A TABLE
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 5;
+        $page *= 10;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 5";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 10";
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
@@ -36,8 +36,8 @@ if(strtoupper($requestMethod) == get) {
             $count++;
         }
         
-        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects";
-        $result = SelectExecuteStatement($con, $sql, []);
+        $sql = "SELECT COUNT(subjID) AS max_count FROM subjects WHERE is_deleted = ?";
+        $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
         while($row = $result -> fetch_assoc()) {
@@ -60,6 +60,7 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
+    //GET METHOD FOR SUBJECTS USING SPECIFIC ID
     if(isset($_GET["id"])) {
         $id = $_GET["id"];
 
@@ -98,10 +99,57 @@ if(strtoupper($requestMethod) == get) {
 }
 
 else if(strtoupper($requestMethod) == post) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //INSERT SUBJECTS
+    if($data->action_type == "ADD") {
+        $sql = "INSERT INTO `subjects`(`subjcode`, `subjdesc`, `year`, `teacher`) VALUES (?,?,?,?)";
+        $params = ["ssss", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject added successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while adding the subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
+
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
 else if(strtoupper($requestMethod) == put) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //UPDATE SUBJECTS
+    if(isset($data->subject_id)) {
+        $sql = "UPDATE subjects SET subjcode = ?, subjdesc = ?, year = ?, teacher = ? WHERE subjID = ?";
+        $params = ["ssssi", $data->subject_code, $data->subject_description, $data->subject_year, $data->subject_teacher, $data->subject_id];
+
+        if(ExecuteStatement($con, $sql, $params)) {
+            $result = array(
+                "type" => "success",
+                "message" => "Subject updated successfully!"
+            );
+        }
+        else {
+            $result = array(
+                "type" => "error",
+                "message" => "An error occured while updating the subject!"
+            );
+        }
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
@@ -110,6 +158,7 @@ else if(strtoupper($requestMethod) == delete) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
+    //DELETE SUBJECTS
     if(isset($data->id)) {
         $sql = "UPDATE subjects SET is_deleted = ? WHERE subjID = ?";
         $params = ["ii", 1, $data->id];
@@ -123,7 +172,7 @@ else if(strtoupper($requestMethod) == delete) {
         else {
             $result = array(
                 "type" => "error",
-                "message" => "An error occured while deleting subject!"
+                "message" => "An error occured while deleting the subject!"
             );
         }
 

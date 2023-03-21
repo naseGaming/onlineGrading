@@ -6,13 +6,12 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
-    //GET METHOD FOR GETTING ALL TEACHERS
-    if(count($key) == 0 ) {
-        $sql = "SELECT username, first, middle, last FROM accounts WHERE accountType = ?";
-        $params = ["i", 1];
+    if(isset($_GET["year"])) {
+        $sql = "SELECT sectionID, section FROM sections WHERE year = ?";
+        $params = ["s", $_GET["year"]];
         
         $result = SelectExecuteStatement($con, $sql, $params);
-        $teachers = array();
+        $sections = array();
     
         $count = 0;
         $flag = false;
@@ -20,40 +19,30 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
     
-            $teachers[$count] = array (
-                "username" => $row["username"],
-                "first_name" => $row["first"],
-                "middle_name" => $row["middle"],
-                "last_name" => $row["last"],
+            $sections[$count] = array (
+                "id" => $row["sectionID"],
+                "section" => $row["section"]
             );
     
             $count++;
         }
-    
-        if($flag) {
-            $result = array(
-                "type" => "success",
-                "content" => $teachers
-            );
-        }
-        else {
-            $result = array(
-                "type" => "error",
-                "message" => "No teacher available!"
-            );
-        }
+
+        $result = array(
+            "type" => "success",
+            "content" => $sections
+        );
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
-    //SERVER SIDE GET METHOD FOR TEACHERS TO BE DISPLAYED IN A TABLE
+    //SERVER SIDE GET METHOD FOR SECTIONS TO BE DISPLAYED IN A TABLE
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
 
         $page--;
         $page *= 10;
 
-        $sql = "SELECT id, username, first, middle, last FROM accounts WHERE is_deleted = ? and accountType = ? Limit $page, 10";
-        $params = ["ii", 0, 1];
+        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? Limit $page, 10";
+        $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
         $subject = array();
@@ -65,15 +54,15 @@ if(strtoupper($requestMethod) == get) {
             $flag = true;
     
             $subject[$count] = array (
-                "id" => $row["id"],
-                "username" => $row["username"],
-                "full_name" => $row["first"] . " " . $row["middle"] . " " . $row["last"],
+                "id" => $row["sectionID"],
+                "section" => $row["section"],
+                "year" => $row["year"]
             );
     
             $count++;
         }
         
-        $sql = "SELECT COUNT(username) AS max_count FROM accounts WHERE is_deleted = ? and accountType = ?";
+        $sql = "SELECT COUNT(sectionID) AS max_count FROM sections WHERE is_deleted = ?";
         $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
@@ -97,13 +86,13 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
-    //GET METHOD FOR TEACHERS USING SPECIFIC ID
+    //GET METHOD FOR SECTION USING SPECIFIC ID
     if(isset($_GET["id"])) {
         $id = $_GET["id"];
 
-        $sql = "SELECT first, middle, last FROM accounts WHERE id = ?";
+        $sql = "SELECT section, year FROM sections WHERE sectionID = ?";
         $params = ["i", $id];
-        $teacher = array();
+        $section = array();
         
         $result = SelectExecuteStatement($con, $sql, $params);
         $flag = false;
@@ -111,17 +100,16 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
 
-            $teacher = array(
-                "first_name" => $row["first"],
-                "middle_name" => $row["middle"],
-                "last_name" => $row["last"]
+            $section = array(
+                "section_name" => $row["section"],
+                "section_year" => $row["year"]
             );
         }
 
         if($flag) {
             $result = array(
                 "type" => "success",
-                "content" => $teacher
+                "content" => $section
             );
         }
         else {
@@ -130,7 +118,7 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), "HTTP/1.1 200 OK");
     }
-
+    
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
 
@@ -138,30 +126,21 @@ else if(strtoupper($requestMethod) == post) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
-    //INSERT TEACHERS
+    //INSERT SECTIONS
     if($data->action_type == "ADD") {
-        $username = $data->first_name.$data->last_name;
-        $password = $data->last_name.$data->first_name;
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $role = 1;
-
-        if($data->middle_name == "") {
-            $data->middle_name = null;
-        }
-
-        $sql = "INSERT INTO `accounts`(`accountType`, `username`, `password`, `first`, `middle`, `last`) VALUES (?,?,?,?,?,?)";
-        $params = ["isssss", $role, $username, $hashed_password, $data->first_name, $data->middle_name, $data->last_name];
+        $sql = "INSERT INTO `sections`(`section`, `year`) VALUES (?,?)";
+        $params = ["ss", $data->section_name, $data->section_year];
 
         if(ExecuteStatement($con, $sql, $params)) {
             $result = array(
                 "type" => "success",
-                "message" => "Teacher added successfully!"
+                "message" => "Section added successfully!"
             );
         }
         else {
             $result = array(
                 "type" => "error",
-                "message" => "An error occured while adding the teacher!"
+                "message" => "An error occured while adding the section!"
             );
         }
 
@@ -175,21 +154,21 @@ else if(strtoupper($requestMethod) == put) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
-    //UPDATE TEACHERS
-    if(isset($data->teacher_id)) {
-        $sql = "UPDATE accounts SET first = ?, middle = ?, last = ? WHERE id = ?";
-        $params = ["sssi", $data->first_name, $data->middle_name, $data->last_name, $data->teacher_id];
+    //UPDATE SECTIONS
+    if(isset($data->section_id)) {
+        $sql = "UPDATE sections SET section = ?, year = ? WHERE sectionID = ?";
+        $params = ["ssi", $data->section_name, $data->section_year, $data->section_id];
 
         if(ExecuteStatement($con, $sql, $params)) {
             $result = array(
                 "type" => "success",
-                "message" => "Subject updated successfully!"
+                "message" => "Section updated successfully!"
             );
         }
         else {
             $result = array(
                 "type" => "error",
-                "message" => "An error occured while updating the subject!"
+                "message" => "An error occured while updating the section!"
             );
         }
 
@@ -203,21 +182,21 @@ else if(strtoupper($requestMethod) == delete) {
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
 
-    //DELETE TEACHERS
+    //DELETE SECTIONS
     if(isset($data->id)) {
-        $sql = "UPDATE accounts SET is_deleted = ? WHERE id = ?";
+        $sql = "UPDATE sections SET is_deleted = ? WHERE sectionID = ?";
         $params = ["ii", 1, $data->id];
 
         if(ExecuteStatement($con, $sql, $params)) {
             $result = array(
                 "type" => "success",
-                "message" => "Teacher deleted successfully!"
+                "message" => "Section deleted successfully!"
             );
         }
         else {
             $result = array(
                 "type" => "error",
-                "message" => "An error occured while deleting the teacher!"
+                "message" => "An error occured while deleting the section!"
             );
         }
 

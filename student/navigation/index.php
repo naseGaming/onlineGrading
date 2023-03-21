@@ -7,25 +7,15 @@ $items = array(
         "link" => "./?dashboard"
     ),
     array(
-        "name" => "Subjects",
+        "name" => "View Grades",
         "data-icon" => "fa-solid fa-book",
-        "link" => "./?subjects"
+        "link" => "./?grades"
     ),
     array(
-        "name" => "Students",
-        "data-icon" => "fa-solid fa-graduation-cap",
-        "link" => "./?students"
+        "name" => "Settings",
+        "data-icon" => "fa-solid fa-gear",
+        "link" => "./?settings"
     ),
-    array(
-        "name" => "Teachers",
-        "data-icon" => "fa-solid fa-chalkboard-user",
-        "link" => "./?teachers"
-    ),
-    array(
-        "name" => "Sections",
-        "data-icon" => "fa-solid fa-people-group",
-        "link" => "./?sections"
-    )
 );
 ?>
     <?php

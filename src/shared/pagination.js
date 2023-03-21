@@ -24,7 +24,7 @@ async function paginateTable(data = {}) {
                 if(data.method != "") {
                     row += `
                         <td>
-                            <button id = "${id}" class = "table_button blue-b white-f" onclick = "${data.method.edit}")">
+                            <button id = "${id}" class = "table_button green-b white-f" onclick = "${data.method.edit}")">
                                 Edit
                             </button>
                             <button id = "${id}" class = "table_button red-b white-f" onclick = "${data.method.delete}">
@@ -42,7 +42,7 @@ async function paginateTable(data = {}) {
             renderPageButtons(response.length, data.table_id, data.current_page, data)
         }
         else {
-            window.location.href = "./?error_pages&code=" + response.code + "&message=" + response.message;
+            window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }
     })
 }
@@ -57,8 +57,8 @@ function nextPage(page, data) {
 }
 
 function renderPageButtons(length, page_id, current_page, data = {}) {
-    if(length > 5) {
-        length = length / 5
+    if(length > 10) {
+        length = length / 10
         if(length % 1 != 0) {
             length = parseInt(length)
             length++
