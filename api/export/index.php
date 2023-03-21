@@ -3,13 +3,7 @@ require_once("../config.php");
 
 if(isset($_SESSION["userName"])) {
     if($_SESSION["userRole"] === 0) {
-        $sql = "SELECT schoolYear FROM `studentlist` order by `schoolYear` asc";
-
-        $result = SelectExecuteStatement($con, $sql, []);
-        
-        while($row=mysqli_fetch_array($result)){
-            $year = $row['schoolYear'];
-        }
+        $year = date("Y");
         
         $years = $year+1;
         
