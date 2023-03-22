@@ -54,7 +54,8 @@ if(strtoupper($requestMethod) == get) {
         }
         else {
             $result = array(
-                "type" => "error",
+                "type" => "empty",
+                "length" => 6,
                 "message" => "No student to display!"
             );
         }

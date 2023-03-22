@@ -144,6 +144,17 @@ button {
     font-size: padding 5px;
 }
 
+.page_header input[type=file] {
+    float: left;
+    width: auto;
+    height: 5vh;
+    margin-top: 2vh;
+    margin-right: 10px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
 .table_responsive {
     float: left;
     height: auto;

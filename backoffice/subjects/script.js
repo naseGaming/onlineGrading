@@ -54,10 +54,16 @@ function loadTeacherComboBox() {
             let row = `<option value = "">~Please Select a Teacher~</option>`
 
             for(let items in response.content) {
-                row += `<option value = "${response.content[items].username}">${response.content[items].first_name} ${response.content[items].middle_name} ${response.content[items].last_name}</option>`
+                row += `<option value = "${response.content[items].id}">${response.content[items].first_name} ${response.content[items].middle_name} ${response.content[items].last_name}</option>`
             }
 
             $("#subject_teacher").html(row)
+        }
+        else if(response.type == "empty") {
+            Swal.fire({
+                icon: "warning",
+                text: response.message,
+            })
         }
         else {
             window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;

@@ -25,6 +25,11 @@ $items = array(
         "name" => "Sections",
         "data-icon" => "fa-solid fa-people-group",
         "link" => "./?sections"
+    ),
+    array(
+        "name" => "Accounts",
+        "data-icon" => "fa-solid fa-user",
+        "link" => "./?accounts"
     )
 );
 ?>
@@ -32,11 +37,11 @@ $items = array(
         <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Menu
     </button>
     <?php
-    foreach($items as $item) {
+        foreach($items as $item) {
     ?>
         <button class = "sidebar_items transparent-b white-f" onclick = "navigate('<?php echo $item['link']; ?>');">
             <i class = "<?php echo $item['data-icon']; ?>"></i> <?php echo $item['name']; ?>
         </button>
     <?php
-    }
+        }
     ?>

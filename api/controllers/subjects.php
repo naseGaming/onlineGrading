@@ -13,7 +13,7 @@ if(strtoupper($requestMethod) == get) {
         $page--;
         $page *= 10;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, a.username, a.first, a.last FROM subjects s LEFT JOIN accounts a on s.teacher = a.username WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 10";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, t.first_name, t.last_name FROM subjects s LEFT JOIN teachers t on s.teacher = t.id WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 10";
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
@@ -30,7 +30,7 @@ if(strtoupper($requestMethod) == get) {
                 "code" => $row["subjcode"],
                 "description" => $row["subjdesc"],
                 "year" => $row["year"],
-                "teacher" => $row["first"] . " " . $row["last"],
+                "teacher" => $row["first_name"] . " " . $row["last_name"],
             );
     
             $count++;
@@ -53,7 +53,8 @@ if(strtoupper($requestMethod) == get) {
         }
         else {
             $result = array(
-                "type" => "error",
+                "type" => "empty",
+                "length" => 5,
                 "message" => "No subject to display!"
             );
         }

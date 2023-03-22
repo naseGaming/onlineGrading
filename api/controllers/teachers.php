@@ -8,8 +8,8 @@ if(strtoupper($requestMethod) == get) {
 
     //GET METHOD FOR GETTING ALL TEACHERS
     if(count($key) == 0 ) {
-        $sql = "SELECT username, first, middle, last FROM accounts WHERE accountType = ?";
-        $params = ["i", 1];
+        $sql = "SELECT id, first_name, middle_name, last_name FROM teachers WHERE is_deleted = ?";
+        $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
         $teachers = array();
@@ -21,10 +21,10 @@ if(strtoupper($requestMethod) == get) {
             $flag = true;
     
             $teachers[$count] = array (
-                "username" => $row["username"],
-                "first_name" => $row["first"],
-                "middle_name" => $row["middle"],
-                "last_name" => $row["last"],
+                "id" => $row["id"],
+                "first_name" => $row["first_name"],
+                "middle_name" => $row["middle_name"],
+                "last_name" => $row["last_name"],
             );
     
             $count++;
@@ -38,7 +38,7 @@ if(strtoupper($requestMethod) == get) {
         }
         else {
             $result = array(
-                "type" => "error",
+                "type" => "empty",
                 "message" => "No teacher available!"
             );
         }
@@ -52,8 +52,8 @@ if(strtoupper($requestMethod) == get) {
         $page--;
         $page *= 10;
 
-        $sql = "SELECT id, username, first, middle, last FROM accounts WHERE is_deleted = ? and accountType = ? Limit $page, 10";
-        $params = ["ii", 0, 1];
+        $sql = "SELECT t.id, a.username, t.first_name, t.middle_name, t.last_name FROM teachers t LEFT JOIN accounts a ON t.id = a.record_id WHERE t.is_deleted = ? Limit $page, 10";
+        $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
         $subject = array();
@@ -66,14 +66,14 @@ if(strtoupper($requestMethod) == get) {
     
             $subject[$count] = array (
                 "id" => $row["id"],
-                "username" => $row["username"],
-                "full_name" => $row["first"] . " " . $row["middle"] . " " . $row["last"],
+                "username" => $row["username"] == null ? "No account" : $row["username"],
+                "full_name" => $row["first_name"] . " " . $row["middle_name"] . " " . $row["last_name"],
             );
     
             $count++;
         }
         
-        $sql = "SELECT COUNT(username) AS max_count FROM accounts WHERE is_deleted = ? and accountType = ?";
+        $sql = "SELECT COUNT(id) AS max_count FROM teachers WHERE is_deleted = ?";
         $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
@@ -90,8 +90,9 @@ if(strtoupper($requestMethod) == get) {
         }
         else {
             $result = array(
-                "type" => "error",
-                "message" => "No student to display!"
+                "type" => "empty",
+                "length" => 3,
+                "message" => "No teacher to display!"
             );
         }
 
@@ -140,17 +141,12 @@ else if(strtoupper($requestMethod) == post) {
 
     //INSERT TEACHERS
     if($data->action_type == "ADD") {
-        $username = $data->first_name.$data->last_name;
-        $password = $data->last_name.$data->first_name;
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $role = 1;
-
         if($data->middle_name == "") {
             $data->middle_name = null;
         }
 
-        $sql = "INSERT INTO `accounts`(`accountType`, `username`, `password`, `first`, `middle`, `last`) VALUES (?,?,?,?,?,?)";
-        $params = ["isssss", $role, $username, $hashed_password, $data->first_name, $data->middle_name, $data->last_name];
+        $sql = "INSERT INTO `teachers`(`first_name`, `middle_name`, `last_name`) VALUES (?,?,?)";
+        $params = ["sss", $data->first_name, $data->middle_name, $data->last_name];
 
         if(ExecuteStatement($con, $sql, $params)) {
             $result = array(
