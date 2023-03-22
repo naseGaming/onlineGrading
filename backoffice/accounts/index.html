@@ -1,80 +1,81 @@
 <div class = "page_header">
     <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
-    <button class = "yellow-b white-f" onclick = "showSubjectModal('IMPORT')">Import</button>
-    <button class = "violet-b white-f" onclick = "exportTemplate()">Export Template</button>
+    <button class = "yellow-b white-f" onclick = "showBatchModal();">Batch</button>
 </div>
 
 <div class = "table_responsive" >
-    <table id = "tblStudents" class = "container">
+    <table id = "tblAccounts" class = "container">
         <thead>
             <tr>
-                <th>Student Number</th>
-                <th>Student Name</th>
-                <th>Year Level</th>
-                <th>Section</th>
-                <th>School Year</th>
+                <th>Account Type</th>
+                <th>Full Name</th>
+                <th>Username</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-    <div class = "tblPage" id = "tblStudents-page">
+    <div class = "tblPage" id = "tblAccounts-page">
     
     </div>
 </div>
 
-<div class = "modal" id = "student_modal">
+<div class = "modal" id = "account_batch_modal">
     <div class = "modal-header">
         <p>Title</p>
     </div>
     <div class = "modal-content">
-        <form id = "frmStudent">
-            <input type = "hidden" id = "student_modal_action" value = "ADD" />
-            <input type = "hidden" id = "student_id_for_edit" value = "" />
+        <form id = "frmSection">
             <div class = "form_group">
-                <label>Student Number</label>
+                <label>Generate New Accounts</label>
                 <div class = "input_group">
-                    <div class = "input_icon">
-                        <i class="fas fa-font"></i>
-                    </div>
-                    <input type = "text" id = "student_number" required>
+                    <input type = "radio" name = "action" checked="checked" id = "action_generate">
                 </div>
             </div>
             <div class = "form_group">
-                <label>First Name</label>
+                <label>Terminate Accounts</label>
                 <div class = "input_group">
-                    <div class = "input_icon">
-                        <i class="fas fa-font"></i>
-                    </div>
-                    <input type = "text" id = "first_name" required style = "text-transform: capitalize;">
+                    <input type = "radio" name = "action" id = "action_teminate">
                 </div>
             </div>
             <div class = "form_group">
-                <label>Middle Name</label>
+                <label>Group Type</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "middle_name" style = "text-transform: capitalize;">
+                    <select id = "group_type" required>
+                        <option value = "">~Please Select a Group~</option>
+                        <option value = "1">All(Employee, Teachers and Students)</option>
+                        <option value = "2">By User Type</option>
+                        <option value = "3">By Year(Student Only)</option>
+                        <option value = "4">By Section(Student Only)</option>
+                        <option value = "5">All Students</option>
+                    </select>
                 </div>
             </div>
             <div class = "form_group">
-                <label>Last Name</label>
+                <label>User Type</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <input type = "text" id = "last_name" required style = "text-transform: capitalize;">
+                    <select id = "user_type" disabled>
+                        <option value = "">~Please Select a User Type~</option>
+                        <option value = "0">Employee</option>
+                        <option value = "1">Teacher</option>
+                        <option value = "2">Student</option>
+                    </select>
                 </div>
             </div>
             <div class = "form_group">
-                <label>Year Level</label>
+                <label>Year</label>
                 <div class = "input_group">
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <select id = "student_year_level" required onchange = "LoadSectionPerYear(this);">
+                    <select id = "year" disabled>
                         <option value = "">~Please Select a Year~</option>
                         <option>Grade 1</option>
                         <option>Grade 2</option>
@@ -97,8 +98,7 @@
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <select id = "student_section" required disabled>
-                        <option value = "">~Please Select a Section~</option>
+                    <select id = "section" disabled>
                     </select>
                 </div>
             </div>

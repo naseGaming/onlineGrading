@@ -41,6 +41,16 @@ async function paginateTable(data = {}) {
             $("#" + data.table_id + " tbody").html(row)
             renderPageButtons(response.length, data.table_id, data.current_page, data)
         }
+        else if(response.type == "empty") {
+            row += `
+            <tr>
+                <td colspan = ${response.length} style = "text-align: center;">
+                    ${response.message}
+                </td>
+            </tr>`
+
+            $("#" + data.table_id + " tbody").html(row)
+        }
         else {
             window.location.href = `./?error_pages&code=${response.code}&message=${response.message}`;
         }

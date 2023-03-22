@@ -23,7 +23,7 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
     
-            $grades = array (
+            $grades[$count] = array (
                 "description" => $row["subjdesc"],
                 "first_grading" => $row["first_grading"] != null ?: "N/A",
                 "second_grading" => $row["second_grading"] != null ?: "N/A",
@@ -66,7 +66,7 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
     
-            $grades = array (
+            $grades[$count] = array (
                 "description" => $row["subjdesc"],
                 "first_grading" => $row["first_grading"] != null ? $row["first_grading"] : "N/A",
                 "second_grading" => $row["second_grading"] != null ? $row["second_grading"] : "N/A",

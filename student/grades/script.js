@@ -8,44 +8,46 @@ function getGrades() {
     GetData("../api/controllers/grades.php")
     .then(response => {
         if(response.type == "success") {
-            row += `<tr>`
-            Object.keys(response.content).forEach(function(key) {
-                var value = response.content[key];
-
-                if(key != "description") {
-                    if(value > 79) {
-                        row += `
-                        <td class = "high_pass">
-                            ${value}
-                        </td>`
+            for(let items in response.content) {
+                row += `<tr>`
+                Object.keys(response.content[items]).forEach(function(key) {
+                    var value = response.content[items][key];
+    
+                    if(key != "description") {
+                        if(value > 79) {
+                            row += `
+                            <td class = "high_pass">
+                                ${value}
+                            </td>`
+                        }
+                        else if(value < 80 && value > 74) {
+                            row += `
+                            <td class = "passing">
+                                ${value}
+                            </td>`
+                        }
+                        else if(value == "N/A") {
+                            row += `
+                            <td>
+                                ${value}
+                            </td>`
+                        }
+                        else {
+                            row += `
+                            <td class = "failed">
+                                ${value}
+                            </td>`
+                        }
                     }
-                    else if(value < 80 && value > 74) {
-                        row += `
-                        <td class = "passing">
-                            ${value}
-                        </td>`
-                    }
-                    else if(value == "N/A") {
+                    else {
                         row += `
                         <td>
                             ${value}
                         </td>`
                     }
-                    else {
-                        row += `
-                        <td class = "failed">
-                            ${value}
-                        </td>`
-                    }
-                }
-                else {
-                    row += `
-                    <td>
-                        ${value}
-                    </td>`
-                }
-            });
-            row += `</tr>`
+                });
+                row += `</tr>`
+            }
 
             $("#tblGrades tbody").html(row)
         }
@@ -69,47 +71,54 @@ function getGradeByYear(app) {
     let year = app.value
     let row = ""
 
+    if(year == "" || year == null) {
+        getGrades()
+        return
+    }
+
     GetData("../api/controllers/grades.php", "year=" + year)
     .then(response => {
         if(response.type == "success") {
-            row += `<tr>`
-            Object.keys(response.content).forEach(function(key) {
-                var value = response.content[key];
-
-                if(key != "description") {
-                    if(value > 79) {
-                        row += `
-                        <td class = "high_pass">
-                            ${value}
-                        </td>`
+            for(let items in response.content) {
+                row += `<tr>`
+                Object.keys(response.content[items]).forEach(function(key) {
+                    var value = response.content[items][key];
+    
+                    if(key != "description") {
+                        if(value > 79) {
+                            row += `
+                            <td class = "high_pass">
+                                ${value}
+                            </td>`
+                        }
+                        else if(value < 80 && value > 74) {
+                            row += `
+                            <td class = "passing">
+                                ${value}
+                            </td>`
+                        }
+                        else if(value == "N/A") {
+                            row += `
+                            <td>
+                                ${value}
+                            </td>`
+                        }
+                        else {
+                            row += `
+                            <td class = "failed">
+                                ${value}
+                            </td>`
+                        }
                     }
-                    else if(value < 80 && value > 74) {
-                        row += `
-                        <td class = "passing">
-                            ${value}
-                        </td>`
-                    }
-                    else if(value == "N/A") {
+                    else {
                         row += `
                         <td>
                             ${value}
                         </td>`
                     }
-                    else {
-                        row += `
-                        <td class = "failed">
-                            ${value}
-                        </td>`
-                    }
-                }
-                else {
-                    row += `
-                    <td>
-                        ${value}
-                    </td>`
-                }
-            });
-            row += `</tr>`
+                });
+                row += `</tr>`
+            }
 
             $("#tblGrades tbody").html(row)
         }
