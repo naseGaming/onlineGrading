@@ -1,6 +1,6 @@
 <div class = "page_header">
     <button class = "blue-b white-f" onclick = "showSubjectModal('ADD')">Add</button>
-    <button class = "yellow-b white-f" onclick = "showSubjectModal('IMPORT')">Batch</button>
+    <button class = "yellow-b white-f" onclick = "showBatchModal();">Batch</button>
 </div>
 
 <div class = "table_responsive" >
@@ -18,5 +18,94 @@
     </table>
     <div class = "tblPage" id = "tblAccounts-page">
     
+    </div>
+</div>
+
+<div class = "modal" id = "account_batch_modal">
+    <div class = "modal-header">
+        <p>Title</p>
+    </div>
+    <div class = "modal-content">
+        <form id = "frmSection">
+            <div class = "form_group">
+                <label>Generate New Accounts</label>
+                <div class = "input_group">
+                    <input type = "radio" name = "action" checked="checked" id = "action_generate">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Terminate Accounts</label>
+                <div class = "input_group">
+                    <input type = "radio" name = "action" id = "action_teminate">
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Group Type</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "group_type" required>
+                        <option value = "">~Please Select a Group~</option>
+                        <option value = "1">All(Employee, Teachers and Students)</option>
+                        <option value = "2">By User Type</option>
+                        <option value = "3">By Year(Student Only)</option>
+                        <option value = "4">By Section(Student Only)</option>
+                        <option value = "5">All Students</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>User Type</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "user_type" disabled>
+                        <option value = "">~Please Select a User Type~</option>
+                        <option value = "0">Employee</option>
+                        <option value = "1">Teacher</option>
+                        <option value = "2">Student</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Year</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "year" disabled>
+                        <option value = "">~Please Select a Year~</option>
+                        <option>Grade 1</option>
+                        <option>Grade 2</option>
+                        <option>Grade 3</option>
+                        <option>Grade 4</option>
+                        <option>Grade 5</option>
+                        <option>Grade 6</option>
+                        <option>Grade 7</option>
+                        <option>Grade 8</option>
+                        <option>Grade 9</option>
+                        <option>Grade 10</option>
+                        <option>Grade 11</option>
+                        <option>Grade 12</option>
+                    </select>
+                </div>
+            </div>
+            <div class = "form_group">
+                <label>Section</label>
+                <div class = "input_group">
+                    <div class = "input_icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <select id = "section" disabled>
+                    </select>
+                </div>
+            </div>
+            <input class = "button_form" type = "submit" value = "Submit" />
+        </form>
+    </div>
+    <div class = "modal-footer">
+        <button onclick = "closeModal();">Close</button>
     </div>
 </div>

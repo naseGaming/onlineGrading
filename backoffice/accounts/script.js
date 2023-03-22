@@ -12,3 +12,12 @@ const details = {
 $(() => {
     paginateTable(details)
 })
+
+function showBatchModal() {
+    const data = {
+        id: "account_batch_modal",
+        title: "Batch Action Form"
+    }
+
+    showModal(data)
+}

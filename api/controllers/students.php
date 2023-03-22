@@ -13,7 +13,7 @@ if(strtoupper($requestMethod) == get) {
         $page--;
         $page *= 10;
 
-        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM studentlist WHERE is_deleted = ? Limit $page, 10";
+        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM students WHERE is_deleted = ? Limit $page, 10";
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
@@ -37,7 +37,7 @@ if(strtoupper($requestMethod) == get) {
             $count++;
         }
         
-        $sql = "SELECT COUNT(studentNumber) AS max_count FROM studentlist WHERE is_deleted = ?";
+        $sql = "SELECT COUNT(studentNumber) AS max_count FROM students WHERE is_deleted = ?";
         $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
@@ -66,7 +66,7 @@ if(strtoupper($requestMethod) == get) {
     if(isset($_GET["getYearLevel"])) {
         $student_number = $_SESSION["userName"];
 
-        $sql = "SELECT first, middle, last, year, section, schoolYear FROM studentlist WHERE studentNumber = ? ";
+        $sql = "SELECT first, middle, last, year, section, schoolYear FROM students WHERE studentNumber = ? ";
         $params = ["s", $student_number];
         
         $result = SelectExecuteStatement($con, $sql, $params);
