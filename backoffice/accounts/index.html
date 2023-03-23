@@ -26,17 +26,17 @@
         <p>Title</p>
     </div>
     <div class = "modal-content">
-        <form id = "frmSection">
+        <form id = "frmBatchAccounts">
             <div class = "form_group">
                 <label>Generate New Accounts</label>
                 <div class = "input_group">
-                    <input type = "radio" name = "action" checked="checked" id = "action_generate">
+                    <input type = "radio" name = "action" checked="checked" id = "action_generate" value = "add">
                 </div>
             </div>
             <div class = "form_group">
                 <label>Terminate Accounts</label>
                 <div class = "input_group">
-                    <input type = "radio" name = "action" id = "action_teminate">
+                    <input type = "radio" name = "action" id = "action_teminate" value = "delete">
                 </div>
             </div>
             <div class = "form_group">
@@ -45,7 +45,7 @@
                     <div class = "input_icon">
                         <i class="fas fa-font"></i>
                     </div>
-                    <select id = "group_type" required>
+                    <select id = "group_type" onchange = "groupTypeComboBox(this);" required>
                         <option value = "">~Please Select a Group~</option>
                         <option value = "1">All(Employee, Teachers and Students)</option>
                         <option value = "2">By User Type</option>
