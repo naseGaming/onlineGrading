@@ -1,17 +1,18 @@
 const details = {
     url_page: 1,
-    url: "../api/controllers/teachers.php",
+    url: "../api/controllers/employees.php",
     method: {
-        edit: "editTeacher(this);",
-        delete: "deleteTeacher(this);"
+        edit: "editEmployee(this);",
+        delete: "deleteEmployee(this);"
     },
-    table_id: "tblTeachers",
+    table_id: "tblEmployees",
     current_page: 1
 }
 
 $(() => {
     paginateTable(details)
     
+    /*
     $("#frmTeacher").on("submit", (e) => {
         e.preventDefault()
 
@@ -24,8 +25,10 @@ $(() => {
             submitEditTeacher(data)
         }
     })
+    */
 })
 
+/*
 function showTeacherModal(type) {
     let title = ""
 
@@ -185,3 +188,4 @@ function clearFormData() {
     $("#middle_name").val("")
     $("#last_name").val("")
 }
+*/

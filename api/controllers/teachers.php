@@ -52,11 +52,11 @@ if(strtoupper($requestMethod) == get) {
         $page--;
         $page *= 10;
 
-        $sql = "SELECT t.id, a.username, t.first_name, t.middle_name, t.last_name FROM teachers t LEFT JOIN accounts a ON t.id = a.record_id WHERE t.is_deleted = ? Limit $page, 10";
-        $params = ["i", 0];
+        $sql = "SELECT t.id, a.username, t.first_name, t.middle_name, t.last_name FROM teachers t LEFT JOIN accounts a ON t.id = a.record_id WHERE t.is_deleted = ? and a.accountType = ? Limit $page, 10";
+        $params = ["ii", 0, 1];
         
         $result = SelectExecuteStatement($con, $sql, $params);
-        $subject = array();
+        $teacher = array();
     
         $count = 0;
         $flag = false;
@@ -64,7 +64,7 @@ if(strtoupper($requestMethod) == get) {
         while($row = $result -> fetch_assoc()) {
             $flag = true;
     
-            $subject[$count] = array (
+            $teacher[$count] = array (
                 "id" => $row["id"],
                 "username" => $row["username"] == null ? "No account" : $row["username"],
                 "full_name" => $row["first_name"] . " " . $row["middle_name"] . " " . $row["last_name"],
@@ -74,6 +74,8 @@ if(strtoupper($requestMethod) == get) {
         }
         
         $sql = "SELECT COUNT(id) AS max_count FROM teachers WHERE is_deleted = ?";
+        $params = ["i", 0];
+
         $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
@@ -85,7 +87,7 @@ if(strtoupper($requestMethod) == get) {
             $result = array(
                 "type" => "success",
                 "length" => $length,
-                "content" => $subject
+                "content" => $teacher
             );
         }
         else {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2023 at 08:10 AM
+-- Generation Time: Mar 23, 2023 at 07:55 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -42,7 +42,15 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `accountType`, `record_id`, `username`, `password`, `is_deleted`, `date_time`) VALUES
-(1, 0, 1, 'admin', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 0, '2023-03-22 06:14:03');
+(1, 0, 1, 'admin', '$2y$10$.o7E/75Te4D.OiXmzd.eLO3K8C/YaEET0Bifc.zBXQSh28oxVyvbC', 0, '2023-03-22 06:14:03'),
+(46, 1, 1, 'roland.regacho', '$2y$10$eU3DXkJtlwsuvRoO0PpYKehgh91K/YsSCa2pJjAJvFtjB4Kkw7ypS', 0, '2023-03-23 06:48:38'),
+(47, 1, 2, 'diana.torsuela', '$2y$10$CIve5OwyowUvRQmYDh4zBOT5ofar32BaAi6w09VFZeyV1ZQpyHb6i', 0, '2023-03-23 06:48:38'),
+(48, 2, 12322323, '12322323', '$2y$10$eiE.w/QiluELifie7a3XVOfyIAxuAnb4NXOFgO6/IFfR.O3fMg1I.', 0, '2023-03-23 06:48:38'),
+(49, 2, 1232323, '1232323', '$2y$10$meZ4cDt/DQ85pFQRtNhZlenG9hurvctN6dmq13zzrNfNnz52zT1MG', 0, '2023-03-23 06:48:39'),
+(50, 2, 20123123, '20123123', '$2y$10$5hOo41yTrbnxZWlsQSMc1OmuLrnWibAdOrNoOaOuEI91h1EgF1Sk.', 0, '2023-03-23 06:48:39'),
+(51, 2, 20123131, '20123131', '$2y$10$p27tK19/HoPbeAZqAjJjnuuk7umD3Gok0xIzpOu2fYp5/BxrMvJva', 0, '2023-03-23 06:48:39'),
+(52, 2, 2012323, '2012323', '$2y$10$ZcL2oXobzWiWDgUIOFEpb.Yeh82Jsb3Ar3Iomcz8thxUphTUpqQRe', 0, '2023-03-23 06:48:39'),
+(53, 2, 23421234, '23421234', '$2y$10$Ph.FQ8McmTz5UNCGYCMo3.7jzpV9AvO8KM5R4uSqMobYSQtELQdAm', 0, '2023-03-23 06:48:39');
 
 -- --------------------------------------------------------
 
@@ -252,7 +260,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `employee`
