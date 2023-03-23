@@ -47,14 +47,14 @@ if(strtoupper($requestMethod) == get) {
             }
 
             if($row["accountType"] == 2) {
-                $sql = "SELECT first_name, last_name FROM students WHERE is_deleted = ? and id = ? Limit $page, 10";
+                $sql = "SELECT first, last FROM students WHERE is_deleted = ? and studentNumber = ? Limit $page, 10";
                 $params = ["ii", 0, $row["record_id"]];
         
                 $student = SelectExecuteStatement($con, $sql, $params);
 
                 $student_details = $student -> fetch_assoc();
 
-                $name = $student_details["first_name"] . " " . $student_details["last_name"];
+                $name = $student_details["first"] . " " . $student_details["last"];
             }
 
             $accountType = "Student";
@@ -78,7 +78,7 @@ if(strtoupper($requestMethod) == get) {
         
         $sql = "SELECT COUNT(sectionID) AS max_count FROM sections WHERE is_deleted = ?";
         $params = ["i", 0];
-        
+
         $result = SelectExecuteStatement($con, $sql, $params);
         $length = 0;
 
@@ -108,6 +108,15 @@ if(strtoupper($requestMethod) == get) {
 }
 
 else if(strtoupper($requestMethod) == post) {
+    $request_body = file_get_contents('php://input');
+    $data = json_decode($request_body);
+
+    //INSERT SECTIONS
+    if($data->action_type == "batch") {
+        if($data->group_type == "1") {
+            generateAccountForAll($con);
+        }
+    }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
 }
@@ -124,4 +133,83 @@ else if(strtoupper($requestMethod) == delete) {
 
 else {
     error("Method not supported", "HTTP/1.1 405 Method Not Allowed");
+}
+
+function generateAccountForAll($con) {
+    $employee_sql = "SELECT id, first_name, last_name FROM employee WHERE is_deleted = ?";
+    $params = ["i", 0];
+
+    $result = SelectExecuteStatement($con, $employee_sql, $params);
+
+    while($employee_row = $result -> fetch_assoc()) {
+        $id = $employee_row["id"];
+
+        if(!checkIfAccountAlreadyExist($con, $id, 0)) {
+            $username = strtolower($employee_row["first_name"]);
+            $password = password_hash(strtolower($employee_row["last_name"]), PASSWORD_DEFAULT);
+
+            insertNewAccount($con, $username, $password, $id, 0);
+        }
+    }
+
+    $teacher_sql = "SELECT id, first_name, last_name FROM teachers WHERE is_deleted = ?";
+    $params = ["i", 0];
+
+    $result = SelectExecuteStatement($con, $teacher_sql, $params);
+
+    while($teacher_row = $result -> fetch_assoc()) {
+        $id = $teacher_row["id"];
+
+        if(!checkIfAccountAlreadyExist($con, $id, 1)) {
+            $username = strtolower($teacher_row["first_name"] . "." . $teacher_row["last_name"]);
+            $password = password_hash(strtolower($teacher_row["last_name"]), PASSWORD_DEFAULT);
+
+            insertNewAccount($con, $username, $password, $id, 1);
+        }
+    }
+
+    $student_sql = "SELECT studentNumber, first, last FROM students WHERE is_deleted = ?";
+    $params = ["i", 0];
+
+    $result = SelectExecuteStatement($con, $student_sql, $params);
+
+    while($student_row = $result -> fetch_assoc()) {
+        $id = $student_row["studentNumber"];
+
+        if(!checkIfAccountAlreadyExist($con, $id, 2)) {
+            $username = strtolower($student_row["studentNumber"]);
+            $password = password_hash(strtolower($student_row["first"] . "." . $student_row["last"]), PASSWORD_DEFAULT);
+
+            insertNewAccount($con, $username, $password, $id, 2);
+        }
+    }
+    
+    $result = array(
+        "type" => "success",
+        "message" => "Batch upload done!"
+    );
+
+    output(json_encode($result), "HTTP/1.1 200 OK");
+}
+
+function checkIfAccountAlreadyExist($con, $record_id, $account_type) {
+    $sql = "SELECT id FROM accounts WHERE is_deleted = ? AND record_id = ? and accountType = ?";
+    $params = ["iii", 0, $record_id, $account_type];
+
+    $result = SelectExecuteStatement($con, $sql, $params);
+    $flag = false;
+
+    while($row = $result -> fetch_assoc()) {
+        $flag = true;
+        break;
+    }
+
+    return $flag;
+}
+
+function insertNewAccount($con, $username, $password, $record_id, $account_type) {
+    $sql = "INSERT INTO `accounts`(`username`, `password`, `record_id`, `accountType`) VALUES (?,?,?,?)";
+    $params = ["ssii", $username, $password, $record_id, $account_type];
+
+    ExecuteStatement($con, $sql, $params);
 }

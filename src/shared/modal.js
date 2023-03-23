@@ -9,6 +9,13 @@ $(() => {
         closeModal()
         hideSideBar()
     })
+
+    $(document).on("keyup", (event) => {
+        if(event.key == "Escape") {
+            closeModal()
+            hideSideBar()
+        }
+    })
 })
 
 function showModal(data = {}) {

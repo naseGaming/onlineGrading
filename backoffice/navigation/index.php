@@ -22,6 +22,11 @@ $items = array(
         "link" => "./?teachers"
     ),
     array(
+        "name" => "Employees",
+        "data-icon" => "fa-solid fa-helmet-safety",
+        "link" => "./?employees"
+    ),
+    array(
         "name" => "Sections",
         "data-icon" => "fa-solid fa-people-group",
         "link" => "./?sections"

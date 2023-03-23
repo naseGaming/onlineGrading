@@ -1,2 +1,2 @@
 <?php
-//header("location: ../api/logout.php");
+header("location: ../api/logout.php");

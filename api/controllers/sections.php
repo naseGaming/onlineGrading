@@ -6,9 +6,40 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 if(strtoupper($requestMethod) == get) {
     $key = array_keys($_GET);
 
+    //GET METHOD FOR GETTING ALL SECTIONS
+    if(count($key) == 0 ) {
+        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? ORDER BY year";
+        $params = ["i", 0];
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $sections = array();
+    
+        $count = 0;
+        $flag = false;
+    
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+    
+            $sections[$count] = array (
+                "id" => $row["sectionID"],
+                "section" => $row["section"],
+                "year" => $row["year"]
+            );
+    
+            $count++;
+        }
+
+        $result = array(
+            "type" => "success",
+            "content" => $sections
+        );
+
+        output(json_encode($result), "HTTP/1.1 200 OK");
+    }
+    //GET METHOD FOR GETTING ALL SECTIONS BY YEAR
     if(isset($_GET["year"])) {
-        $sql = "SELECT sectionID, section FROM sections WHERE year = ?";
-        $params = ["s", $_GET["year"]];
+        $sql = "SELECT sectionID, section FROM sections WHERE year = ? AND is_deleted = ?";
+        $params = ["si", $_GET["year"], 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
         $sections = array();
