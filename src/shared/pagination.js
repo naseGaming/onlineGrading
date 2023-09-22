@@ -3,8 +3,8 @@ async function paginateTable(data = {}) {
     GetData(data.url, "page=" + data.url_page)
     .then(response => {
         if(response.type == "success") {
+            let id = "";
             for(let items in response.content) {
-                let id = "";
                 row += `<tr>`
 
                 Object.keys(response.content[items]).forEach(function(key) {

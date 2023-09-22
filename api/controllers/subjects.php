@@ -59,7 +59,7 @@ if(strtoupper($requestMethod) == get) {
             );
         }
 
-        output(json_encode($result), "HTTP/1.1 200 OK");
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
     //GET METHOD FOR SUBJECTS USING SPECIFIC ID
     if(isset($_GET["id"])) {
@@ -93,7 +93,7 @@ if(strtoupper($requestMethod) == get) {
             error("Bad Request", "HTTP/1.1 403 Bad Request");
         }
 
-        output(json_encode($result), "HTTP/1.1 200 OK");
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
@@ -121,7 +121,7 @@ else if(strtoupper($requestMethod) == post) {
             );
         }
 
-        output(json_encode($result), "HTTP/1.1 200 OK");
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
@@ -149,7 +149,7 @@ else if(strtoupper($requestMethod) == put) {
             );
         }
 
-        output(json_encode($result), "HTTP/1.1 200 OK");
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
@@ -177,7 +177,7 @@ else if(strtoupper($requestMethod) == delete) {
             );
         }
 
-        output(json_encode($result), "HTTP/1.1 200 OK");
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
