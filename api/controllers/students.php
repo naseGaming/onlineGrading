@@ -11,9 +11,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 10;
+        $page *= max_page_count;
 
-        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM students WHERE is_deleted = ? Limit $page, 10";
+        $sql = "SELECT studentNumber, first, middle, last, year, section, schoolYear FROM students WHERE is_deleted = ? Limit $page, ".max_page_count;
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

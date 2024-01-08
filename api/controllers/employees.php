@@ -11,9 +11,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 10;
+        $page *= max_page_count;
 
-        $sql = "SELECT e.id, a.username, e.first_name, e.middle_name, e.last_name FROM employee e LEFT JOIN accounts a ON e.id = a.record_id WHERE e.is_deleted = ? and a.accountType = ? Limit $page, 10";
+        $sql = "SELECT e.id, a.username, e.first_name, e.middle_name, e.last_name FROM employee e LEFT JOIN accounts a ON e.id = a.record_id WHERE e.is_deleted = ? and a.accountType = ? Limit $page, ".max_page_count;
         $params = ["ii", 0, 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

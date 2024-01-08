@@ -11,9 +11,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 10;
+        $page *= max_page_count;
 
-        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, t.first_name, t.last_name FROM subjects s LEFT JOIN teachers t on s.teacher = t.id WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, 10";
+        $sql = "SELECT s.subjID, s.subjcode, s.subjdesc, s.year, s.teacher, t.first_name, t.last_name FROM subjects s LEFT JOIN teachers t on s.teacher = t.id WHERE s.is_deleted = ? ORDER BY s.subjID Limit $page, ".max_page_count;
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

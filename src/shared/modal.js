@@ -27,8 +27,8 @@ function showModal(data = {}) {
 }
 
 function closeModal() {
-    $.when($(".loading").hide())
+    $.when($(".modal").slideUp())
     .done(() => {
-        $(".modal").slideUp()
+        $(".loading").hide()
     })
 }

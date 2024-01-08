@@ -70,9 +70,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 10;
+        $page *= max_page_count;
 
-        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? Limit $page, 10";
+        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? Limit $page, ".max_page_count;
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);

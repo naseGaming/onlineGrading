@@ -9,9 +9,9 @@ if(strtoupper($requestMethod) == get) {
         $page = $_GET["page"];
 
         $page--;
-        $page *= 10;
+        $page *= max_page_count;
 
-        $sql = "SELECT id, accountType, record_id, username FROM accounts WHERE is_deleted = ? ORDER BY accountType Limit $page, 10";
+        $sql = "SELECT id, accountType, record_id, username FROM accounts WHERE is_deleted = ? ORDER BY accountType Limit $page, ".max_page_count;
         $params = ["i", 0];
         
         $result = SelectExecuteStatement($con, $sql, $params);
@@ -25,7 +25,7 @@ if(strtoupper($requestMethod) == get) {
             $name = "";
 
             if($row["accountType"] == 0) {
-                $sql = "SELECT first_name, last_name FROM employee WHERE is_deleted = ? and id = ? Limit $page, 10";
+                $sql = "SELECT first_name, last_name FROM employee WHERE is_deleted = ? and id = ? Limit $page, ".max_page_count;
                 $params = ["ii", 0, $row["record_id"]];
         
                 $employee = SelectExecuteStatement($con, $sql, $params);
@@ -36,7 +36,7 @@ if(strtoupper($requestMethod) == get) {
             }
 
             if($row["accountType"] == 1) {
-                $sql = "SELECT first_name, last_name FROM teachers WHERE is_deleted = ? and id = ? Limit $page, 10";
+                $sql = "SELECT first_name, last_name FROM teachers WHERE is_deleted = ? and id = ? Limit $page, ".max_page_count;
                 $params = ["ii", 0, $row["record_id"]];
         
                 $teacher = SelectExecuteStatement($con, $sql, $params);
@@ -47,7 +47,7 @@ if(strtoupper($requestMethod) == get) {
             }
 
             if($row["accountType"] == 2) {
-                $sql = "SELECT first, last FROM students WHERE is_deleted = ? and studentNumber = ? Limit $page, 10";
+                $sql = "SELECT first, last FROM students WHERE is_deleted = ? and studentNumber = ? Limit $page, ".max_page_count;
                 $params = ["ii", 0, $row["record_id"]];
         
                 $student = SelectExecuteStatement($con, $sql, $params);
@@ -76,7 +76,7 @@ if(strtoupper($requestMethod) == get) {
             $count++;
         }
         
-        $sql = "SELECT COUNT(sectionID) AS max_count FROM sections WHERE is_deleted = ?";
+        $sql = "SELECT COUNT(id) AS max_count FROM accounts WHERE is_deleted = ?";
         $params = ["i", 0];
 
         $result = SelectExecuteStatement($con, $sql, $params);

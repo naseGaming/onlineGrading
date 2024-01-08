@@ -1,3 +1,5 @@
+const MAX_PAGE_COUNT = 10
+
 async function paginateTable(data = {}) {
     var row = "";
     GetData(data.url, "page=" + data.url_page)
