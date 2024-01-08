@@ -69,8 +69,8 @@ function nextPage(page, data) {
 }
 
 function renderPageButtons(length, page_id, current_page, data = {}) {
-    if(length > 10) {
-        length = length / 10
+    if(length > MAX_PAGE_COUNT) {
+        length = length / MAX_PAGE_COUNT
         if(length % 1 != 0) {
             length = parseInt(length)
             length++
