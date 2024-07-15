@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="../design/template.css" />
         <link rel="stylesheet" type="text/css" href="../design/backoffice.css" />
         <link rel="stylesheet" type="text/css" href="../design/table.css" />
+        <link rel="stylesheet" type="text/css" href="../design/cards.css" />
         <script src="https://kit.fontawesome.com/8b6b1fa9e8.js" crossorigin="anonymous"></script>
         <script src = "../src/jquery/jquery-3.1.1.min.js"></script>
         <script src = "../src/jquery/jquery-ui.min.js"></script>
@@ -21,6 +22,7 @@
         <script src = "../src/shared/fetch.js"></script>
         <script src = "../src/shared/pagination.js"></script>
         <script src = "../src/shared/modal.js"></script>
+        <script src = "../src/shared/cards.js"></script>
         <script src = "../src/backoffice/script.js"></script>
         <script src = "navigation/script.js"></script>
         <?php

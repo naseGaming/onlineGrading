@@ -24,16 +24,25 @@ async function paginateTable(data = {}) {
                 });
 
                 if(data.method != "") {
-                    row += `
-                        <td>
+                    row += `<td>`
+
+                    if(data.method.hasOwnProperty("edit")) {
+                        row += `
                             <button id = "${id}" class = "table_button green-b white-f" onclick = "${data.method.edit}")">
                                 Edit
                             </button>
+                        `
+                    }
+
+                    if(data.method.hasOwnProperty("delete")) {
+                        row += `
                             <button id = "${id}" class = "table_button red-b white-f" onclick = "${data.method.delete}">
                                 Delete
                             </button>
-                        </td>
-                    </tr>`
+                        `
+                    }
+
+                    row += `</td>`
                 }
                 else {
                     row += `</tr>`

@@ -150,6 +150,36 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
+    //GET METHOD FOR DISPLAYING CARDS OF SECTION
+    if(isset($_GET["type"])) {
+        $sql = "SELECT sectionID, section, year FROM sections WHERE is_deleted = ? ORDER BY year";
+        $params = ["i", 0];
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $sections = array();
+    
+        $count = 0;
+        $flag = false;
+    
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+    
+            $sections[$count] = array (
+                "id" => $row["sectionID"],
+                "desc" => $row["section"],
+                "title" => $row["year"]
+            );
+    
+            $count++;
+        }
+
+        $result = array(
+            "type" => "success",
+            "content" => $sections
+        );
+
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
+    }
     
     error("Page not found", "HTTP/1.1 404 Not Found");
 }

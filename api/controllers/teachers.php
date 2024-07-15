@@ -104,7 +104,7 @@ if(strtoupper($requestMethod) == get) {
     if(isset($_GET["id"])) {
         $id = $_GET["id"];
 
-        $sql = "SELECT first, middle, last FROM accounts WHERE id = ?";
+        $sql = "SELECT first_name, middle_name, last_name FROM teachers WHERE id = ?";
         $params = ["i", $id];
         $teacher = array();
         
@@ -115,9 +115,9 @@ if(strtoupper($requestMethod) == get) {
             $flag = true;
 
             $teacher = array(
-                "first_name" => $row["first"],
-                "middle_name" => $row["middle"],
-                "last_name" => $row["last"]
+                "first_name" => $row["first_name"],
+                "middle_name" => $row["middle_name"],
+                "last_name" => $row["last_name"]
             );
         }
 
@@ -175,7 +175,7 @@ else if(strtoupper($requestMethod) == put) {
 
     //UPDATE TEACHERS
     if(isset($data->teacher_id)) {
-        $sql = "UPDATE accounts SET first = ?, middle = ?, last = ? WHERE id = ?";
+        $sql = "UPDATE teachers SET first_name = ?, middle_name = ?, last_name = ? WHERE id = ?";
         $params = ["sssi", $data->first_name, $data->middle_name, $data->last_name, $data->teacher_id];
 
         if(ExecuteStatement($con, $sql, $params)) {

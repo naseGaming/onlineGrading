@@ -28,31 +28,31 @@ $(() => {
     */
 })
 
-/*
-function showTeacherModal(type) {
+
+function showEmployeeModal(type) {
     let title = ""
 
     if(type == "ADD") {
         clearFormData()
-        title = "Add Teacher Form"
+        title = "Add Employee Form"
     }
     else {
-        title = "Edit Teacher Form"
+        title = "Edit Employee Form"
     }
 
     let data = {
-        id: "teacher_modal",
+        id: "employee_modal",
         title: title
     }
 
-    $("#teacher_modal_action").val(type)
+    $("#employee_modal_action").val(type)
     showModal(data)
 }
 
-function editTeacher(app) {
+function editEmployee(app) {
     const id = app.id
 
-    GetData("../api/controllers/teachers.php", "id=" + id)
+    GetData("../api/controllers/employees.php", "id=" + id)
     .then(response => {
         if(response.type == "success") {
             populateForm(response.content)
@@ -66,7 +66,7 @@ function editTeacher(app) {
     })
 }
 
-function deleteTeacher(app) {
+function deleteEmployee(app) {
     const id = app.id
     
     Swal.fire({
@@ -87,7 +87,7 @@ function deleteTeacher(app) {
                 id: id
             }
             
-            DeleteData("../api/controllers/teachers.php", data)
+            DeleteData("../api/controllers/employees.php", data)
             .then(response => {
                 if(response.type == "success") {
                     Swal.fire({
@@ -112,7 +112,7 @@ function deleteTeacher(app) {
 }
 
 function submitAddTeacher(data = {}) {
-    PostData("../api/controllers/teachers.php", data)
+    PostData("../api/controllers/employees.php", data)
     .then(response => {
         if(response.type == "success") {
             Swal.fire({
@@ -136,7 +136,7 @@ function submitAddTeacher(data = {}) {
 }
 
 function submitEditTeacher(data = {}) {
-    PutData("../api/controllers/teachers.php", data)
+    PutData("../api/controllers/employees.php", data)
     .then(response => {
         if(response.type == "success") {
             Swal.fire({
@@ -188,4 +188,3 @@ function clearFormData() {
     $("#middle_name").val("")
     $("#last_name").val("")
 }
-*/

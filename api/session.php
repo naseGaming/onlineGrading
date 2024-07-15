@@ -9,14 +9,14 @@ if(isset($_SESSION["userName"])) {
         }
         header("location: ./backoffice/?dashboard");
     }
-    if($_SESSION["userRole"] === 1 && !preg_match("/teacher/", $actual_link)) {
+    else if($_SESSION["userRole"] === 1 && !preg_match("/teacher/", $actual_link)) {
         if(preg_match("/backoffice/", $actual_link) || preg_match("/student/", $actual_link)) {
             header("location: ../teacher/?dashboard");
             return;
         }
         header("location: ./teacher/?dashboard");
     }
-    if($_SESSION["userRole"] === 2 && !preg_match("/student/", $actual_link)) {
+    else if($_SESSION["userRole"] === 2 && !preg_match("/student/", $actual_link)) {
         if(preg_match("/backoffice/", $actual_link) || preg_match("/teacher/", $actual_link)) {
             header("location: ../student/?dashboard");
             return;
