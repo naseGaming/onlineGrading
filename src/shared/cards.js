@@ -8,7 +8,7 @@ async function renderCards(data = {}) {
                 render += `<div class='cards-title'>${response.content[items].title}</div>`
                 render += `<div class='cards-desc'>${response.content[items].desc}</div>`
                 if(data.button) {
-                    render += `<div class='cards-btn'><button>View</button></div>`
+                    render += `<div class='cards-btn' onclick='cardNavigate("${data.action + response.content[items].id}")'><button>View</button></div>`
                 }
                 render += "</div>"
             }
@@ -16,4 +16,8 @@ async function renderCards(data = {}) {
 
         $(`#${data.id}`).html(render)
     })
+}
+
+function cardNavigate(link) {
+    window.location.href = link
 }

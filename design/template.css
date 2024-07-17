@@ -4,6 +4,7 @@ body {
     margin: 0;
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 button {
@@ -36,8 +37,8 @@ button {
 }
 
 .sidebar_items:hover {
-    background: rgba(250, 250, 250, 1);
-    color: rgba(50, 50, 50, 1);
+    background: rgba(50, 50, 50, 1);
+    color: rgba(250, 250, 250, 1);
     font-size: 1.3em;
 }
 
@@ -103,7 +104,8 @@ button {
     float: left;
     min-height: 100vh;
     width: 100vw;
-    margin-top: 80px;
+    margin-top: 70px;
+    background: rgba(50, 50, 50, 1);
 }
 
 .page_header {
@@ -127,7 +129,8 @@ button {
 }
 
 .page_header button:hover {
-    background: rgba(50, 50, 50, 1);
+    color: rgba(50, 50, 50, 1);
+    background: white;
 }
 
 .page_header select {
@@ -160,8 +163,8 @@ button {
 .table_responsive {
     float: left;
     height: auto;
-    width: 60vw;
-    margin-left: 20vw;
+    width: 80vw;
+    margin-left: 10vw;
     margin-bottom: 50px;
 }
 
@@ -169,7 +172,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     min-width: 600px;
-    border: 2px solid gray;
+    border-radius: 5px;
 }
 
 tr {
@@ -243,8 +246,8 @@ footer {
     width: 100vw;
     height: 20px;
     vertical-align: middle;
-    background: rgba(50, 50, 50, 1);
-    color: rgba(250, 250, 250, 1);
+    background: rgba(250, 250, 250, 1);
+    color: rgba(30, 30, 30, 1);
     padding: 20px;
     font-size: 15px;
     text-align: center;
@@ -319,6 +322,7 @@ footer {
     height: 50px;
     margin-top: 10px;
     text-align: left;
+    color: black;
 }
 
 .form_group label {
@@ -346,6 +350,12 @@ footer {
     height: 28px;
     border: 1px solid black;
     outline: none;
+    transition-duration: 0.5s;
+}
+
+.input_group input:focus {
+    font-size: 1em;
+    transition-duration: 0.5s;
 }
 
 .input_group input:disabled {
@@ -387,6 +397,7 @@ footer {
 .button_form:hover {
     background: #04AA6D;
     color: white;
+    transition-duration: 0.5s;
 }
 
 .loading {
@@ -445,4 +456,16 @@ footer {
         width: 100vw;
         margin-left: 0;
     }
+}
+
+.container_form {
+    color: white;
+}
+
+.container_form .form_group label {
+    color: white;
+}
+
+.container_form .form_group .input_icon {
+    background: rgba(250, 250, 250, 1);
 }

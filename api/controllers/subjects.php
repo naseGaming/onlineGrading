@@ -95,6 +95,41 @@ if(strtoupper($requestMethod) == get) {
 
         output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
     }
+    //GET METHOD FOR SUBJECTS USING SPECIFIC SECTION
+    if(isset($_GET["section"])) {
+        $id = $_GET["section"];
+
+        $sql = "SELECT s.subjID, s.subjdesc FROM subjects s LEFT JOIN sections sc ON s.year = sc.year WHERE sc.sectionID = ? AND s.teacher = ? ORDER BY s.subjdesc";
+        $params = ["ii", $id, $_SESSION["userID"]];
+        $subject = array();
+        echo $_SESSION["userID"];
+        
+        $result = SelectExecuteStatement($con, $sql, $params);
+        $flag = false;
+        $count = 0;
+
+        while($row = $result -> fetch_assoc()) {
+            $flag = true;
+
+            $subject[$count] = array(
+                "code" => $row["subjID"],
+                "description" => $row["subjdesc"],
+            );
+            $count++;
+        }
+
+        if($flag) {
+            $result = array(
+                "type" => "success",
+                "content" => $subject
+            );
+        }
+        else {
+            error("Bad Request", "HTTP/1.1 403 Bad Request");
+        }
+
+        output(json_encode($result), array('Content-Type: application/json', "HTTP/1.1 200 OK"));
+    }
 
     error("Page not found", "HTTP/1.1 404 Not Found");
 }

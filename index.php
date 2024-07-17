@@ -22,19 +22,19 @@
                 <div class = "form_group">
                     <label>Username</label>
                     <div class = "input_group">
-                        <input type = "text" id = "txtUsername">
                         <div class = "input_icon" id = "divUsername">
                             <i class="fa-solid fa-user"></i>
                         </div>
+                        <input type = "text" id = "txtUsername" autocomplete="on">
                     </div>
                 </div>
                 <div class = "form_group">
                     <label>Password</label>
                     <div class = "input_group">
-                        <input type = "password" id = "txtPassword">
                         <div class = "input_icon" id = "divPassword">
                             <i class="fa-solid fa-lock"></i>
                         </div>
+                        <input type = "password" id = "txtPassword" autocomplete="off">
                     </div>
                 </div>
                 <input type = "submit" value = "Login" class = "main-b white-f"/>

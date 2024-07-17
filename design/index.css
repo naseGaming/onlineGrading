@@ -32,7 +32,7 @@ h1 {
 .form_group {
     width: 80%;
     margin-left: 10%;
-    height: 50px;
+    height: 55px;
     margin-top: 10px;
     text-align: left;
 }
@@ -46,10 +46,12 @@ h1 {
 .input_icon {
     float: left;
     width: 10%;
-    height: 30px;
+    height: 35px;
     border: 1px solid black;
     text-align: center;
-    border-left: none;
+    border-right: none;
+    background: white;
+    font-size: 20px;
 }
 
 .input_icon i {
@@ -59,10 +61,10 @@ h1 {
 .input_group input {
     float: left;
     width: 89%;
-    height: 32px;
+    height: 37px;
     border: 1px solid black;
     outline: none;
-    border-right: none;
+    border-left: none;
     padding-left: 10px;
     font-size: 0.8em;
     transition-duration: 0.5s;
@@ -77,7 +79,7 @@ input[type="submit"] {
     width: 80%;
     margin-top: 3vh;
     font-size: 1em;
-    padding: 10px;
+    padding: 13px;
     border: none;
     cursor: pointer;
     outline: none;
@@ -89,6 +91,7 @@ input[type="submit"]:focus {
 
 input[type="submit"]:hover {
     background: rgba(50, 50, 50, 1);
+    transition-duration: 0.5s;
 }
 
 @media only screen and (min-width: 1020px) and (max-width: 1500px) {

@@ -45,11 +45,11 @@
             ?>
         </button>
         </div>
-		<div class = "sidebar tertiary-b white-f" id = "sidebar" >
+		<div class = "sidebar tertiary-b black-f" id = "sidebar" >
             <?php include "navigation/index.php"; ?>
 		</div>
-        <div class = "profile_bar tertiary-b white-f" id = "profile_bar" >
-            <button class = "tertiary-b white-f" onclick = "logout();">Logout <i class="fa-solid fa-power-off"></i></button>
+        <div class = "profile_bar tertiary-b black-f" id = "profile_bar" >
+            <button class = "tertiary-b black-f" onclick = "logout();">Logout <i class="fa-solid fa-power-off"></i></button>
         </div>
         <div class = "content">
         <?php

@@ -47,3 +47,10 @@
     color: white;
     background: rgba(100, 200, 100, 1);
 }
+
+@media only screen and (orientation: portrait) {
+    .cards {
+        width: 28vw;
+        margin-left: 4vw;
+    }
+}

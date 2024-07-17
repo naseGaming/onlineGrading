@@ -2,7 +2,13 @@ const MAX_PAGE_COUNT = 10
 
 async function paginateTable(data = {}) {
     var row = "";
-    GetData(data.url, "page=" + data.url_page)
+    let additional_params = "page=" + data.url_page
+
+    if(data.additional_information) {
+        additional_params += "&" + data.additional_information
+    }
+
+    GetData(data.url, additional_params)
     .then(response => {
         if(response.type == "success") {
             let id = "";
@@ -16,14 +22,15 @@ async function paginateTable(data = {}) {
                         id = value
                     }
                     else {
+                        
                         row += `
                         <td>
-                            ${value}
+                            ${value == null ? "N/A" : value}
                         </td>`
                     }
                 });
 
-                if(data.method != "") {
+                if(data.method) {
                     row += `<td>`
 
                     if(data.method.hasOwnProperty("edit")) {
